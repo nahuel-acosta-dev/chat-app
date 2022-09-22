@@ -38,7 +38,24 @@ FRONTEND = os.environ.get('FRONTEND')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = ['*']
+#ALLOWED_HOSTS = ['*']
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+    'http://localhost:8000',
+    'http://127.0.0.1:3000',
+    'http://127.0.0.1:8000',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000',
+    'http://localhost:8000',
+    'http://127.0.0.1:3000',
+    'http://127.0.0.1:8000',
+]
+
+ALLOWED_HOSTS = ['localhost', '0.0.0.0',
+                 '127.0.0.1', '594b-168-196-143-13.sa.ngrok.io']
 
 
 # Application definition
