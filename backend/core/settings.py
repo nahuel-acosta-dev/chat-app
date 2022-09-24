@@ -87,7 +87,7 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 
-PROJECT_APPS = []
+PROJECT_APPS = ['apps.user']
 CHAT_APPS = []
 THIRD_PARTY_APPS = [
     'corsheaders',
@@ -223,10 +223,9 @@ AUTHENTICATION_BACKENDS = (
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+AUTH_USER_MODEL = "user.UserAccount"
 DATABASES = MYSQL
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
