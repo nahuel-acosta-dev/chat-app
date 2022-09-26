@@ -5,6 +5,10 @@ import os
 # Create your models here.
 
 
+AUTH_PROVIDERS = {'facebook': 'facebook', 'google': 'google',
+                  'twitter': 'twitter', 'email': 'email'}
+
+
 class UserAccount(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     first_name = models.CharField(max_length=255)
@@ -12,6 +16,9 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
+    auth_provider = models.CharField(
+        max_length=255, blank=False,
+        null=False, default=AUTH_PROVIDERS.get('email'))
 
     objects = UserAccountManager()
 
