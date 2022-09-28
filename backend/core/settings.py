@@ -75,7 +75,6 @@ CSRF_TRUSTED_ORIGINS = [
 ALLOWED_HOSTS = ['localhost', '0.0.0.0',
                  '127.0.0.1', '']
 
-
 # Application definition
 
 DJANGO_APPS = [
@@ -85,6 +84,7 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 ]
 
 PROJECT_APPS = ['apps.user', 'apps.social_auth']
@@ -104,6 +104,9 @@ THIRD_PARTY_APPS = [
 
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + CHAT_APPS + THIRD_PARTY_APPS
+
+SITE_ID = 1
+
 
 MIDDLEWARE = [
     'social_django.middleware.SocialAuthExceptionMiddleware',
@@ -135,6 +138,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -203,7 +207,7 @@ DJOSER = {
     'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
     'SOCIAL_AUTH_TOKEN_STRATEGY': 'djoser.social.token.jwt.TokenStrategy',
-    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['http://localhost:8000/google', 'http://localhost:8000/facebook'],
+    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['http://localhost:3000/', 'http://localhost:3000/login'],
     'SERIALIZERS': {
         'user_create': 'apps.user.serializers.UserCreateSerializer',
         'user': 'apps.user.serializers.UserCreateSerializer',
@@ -218,6 +222,16 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('GG_CLIENT_ID')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('GG_SECRET_CLIENT')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+    'https://www.googleapis.com/auth/userinfo.email',
+    'https://www.googleapis.com/auth/userinfo.profile',
+    'openid'
+]
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ['first_name', 'last_name']
 
 ################################################################
 
