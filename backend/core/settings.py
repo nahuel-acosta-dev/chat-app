@@ -87,7 +87,7 @@ DJANGO_APPS = [
     'django.contrib.sites',
 ]
 
-PROJECT_APPS = ['apps.user', 'apps.social_auth']
+PROJECT_APPS = ['apps.user', 'apps.user_profile']
 CHAT_APPS = []
 THIRD_PARTY_APPS = [
     'corsheaders',
@@ -166,9 +166,11 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SIMPLE_JWT = {
-    'AUTH_HEADER_TYPES': ('JWT',),
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'AUTH_HEADER_TYPES': ('JWT', ),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
+    'ROTATE_REFRESFH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
     'AUTH_TOKEN_CLASSES': (
         'rest_framework_simplejwt.tokens.AccessToken',
     )

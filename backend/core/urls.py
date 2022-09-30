@@ -23,9 +23,12 @@ from rest_framework import routers
 from rest_framework_extensions.routers import ExtendedSimpleRouter
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from apps.user_profile.views import UserProfileView
 
 router: ExtendedSimpleRouter = ExtendedSimpleRouter()
 router = routers.DefaultRouter()
+
+router.register(r'profile', UserProfileView, basename='profile')
 
 
 schema_view = get_schema_view(
@@ -57,7 +60,6 @@ urlpatterns = [
     path('auth/', include('djoser.urls.jwt')),
     path('auth/', include('djoser.social.urls')),
     ############
-
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
