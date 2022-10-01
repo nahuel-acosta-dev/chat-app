@@ -6,7 +6,7 @@ from apps.user.models import UserAccount
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserAccount
-        fields = ('id', 'email', 'first_name', 'last_name')
+        fields = ('email', 'first_name', 'last_name')
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
@@ -17,13 +17,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class UserProfileListSerializer(serializers.ModelSerializer):
+class UpdateUserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-
-    def to_representation(self, instance):
-        return{
-            'id': instance['id'],
-            'photo': instance['photo'],
-            'user': instance['user']
-        }
+        fields = ('photo',)
