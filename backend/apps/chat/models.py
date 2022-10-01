@@ -1,5 +1,6 @@
 from django.db import models
 from apps.user_profile.models import UserProfile
+from apps.messages.models import Messages
 # Create your models here.
 
 
@@ -8,6 +9,8 @@ class ChatModel(models.Model):
         UserProfile, models.CASCADE, blank=False, related_name="chat_user1")
     profile2 = models.ForeignKey(
         UserProfile, models.CASCADE, blank=False, related_name="chat_user2")
+    messages = models.ForeignKey(
+        Messages, models.CASCADE, blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def chat_name(self):

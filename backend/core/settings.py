@@ -88,7 +88,7 @@ DJANGO_APPS = [
 ]
 
 PROJECT_APPS = ['apps.user', 'apps.user_profile']
-CHAT_APPS = ['apps.chat']
+CHAT_APPS = ['apps.chat', 'apps.messages']
 THIRD_PARTY_APPS = [
     'corsheaders',
     'rest_framework',
