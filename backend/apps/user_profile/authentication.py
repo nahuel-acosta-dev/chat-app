@@ -7,7 +7,6 @@ from rest_framework import status
 def access_user_data(request, pk):
     # se comprueba el token y se obtiene el id
     token = get_authorization_header(request).split()
-    print(token)
     access_token_obj = AccessToken(token[1])
     user_id = access_token_obj['user_id']
     # Si el usuario que hace el llamado es el que esta registrado se le permite continuar
