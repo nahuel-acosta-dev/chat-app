@@ -5,7 +5,7 @@ User = settings.AUTH_USER_MODEL
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     photo = models.ImageField(upload_to='photos/%Y/%m/')
 
     def __str__(self):

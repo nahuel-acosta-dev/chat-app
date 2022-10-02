@@ -5,19 +5,18 @@ from apps.messages.models import Messages
 
 
 class ChatModel(models.Model):
-    profile1 = models.ForeignKey(
-        UserProfile, models.CASCADE, blank=False, related_name="chat_user1")
-    profile2 = models.ForeignKey(
-        UserProfile, models.CASCADE, blank=False, related_name="chat_user2")
-    messages = models.ForeignKey(
-        Messages, models.CASCADE, blank=True, null=True)
+    send = models.ForeignKey(
+        UserProfile, on_delete=models.CASCADE, blank=False, related_name="chat_user1")
+    receive = models.ForeignKey(
+        UserProfile, on_delete=models.CASCADE, blank=False, related_name="chat_user2")
+    message = models.TextField(max_length=500, blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def chat_name(self):
-        if self.profile1.user_id > self.profile2.user_id:
-            return f"chat_{self.profile1.user_id}_{self.profile2.user_id}"
+        if self.send.user_id > self.receive.user_id:
+            return f"chat_{self.receive.user_id}_{self.send.user_id}"
         else:
-            return f"chat_{self.profile2.user_id}_{self.profile1.user_id}"
+            return f"chat_{self.send.user_id}_{self.receive.user_id}"
 
     def __str__(self):
-        return f"chat of {self.profile1.user_id} and {self.profile2.user_id}"
+        return self.chat_name()
