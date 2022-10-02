@@ -1,6 +1,5 @@
 from django.db import models
 from apps.user_profile.models import UserProfile
-from apps.messages.models import Messages
 # Create your models here.
 
 
