@@ -152,7 +152,15 @@ REST_FRAMEWORK = {
 }
 
 SWAGGER_SETTINGS = {
-    'DOC_EXPANSION': 'name'
+    'DOC_EXPANSION': 'name',
+    'USE_SESSION_AUTH': True,
+    'SECURITY_DEFINITIONS': {
+        'JWT': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    }
 }
 
 ################################

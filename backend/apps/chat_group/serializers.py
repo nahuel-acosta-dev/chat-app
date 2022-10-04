@@ -9,6 +9,18 @@ class ChatGroupSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class CreateUserInChatGroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserInChatGroup
+        fields = ('chat_group', 'profile', )
+
+
+class UpdateUserInChatGroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserInChatGroup
+        fields = ('admin',)
+
+
 class UserInChatGroupSerializer(serializers.ModelSerializer):
     chat_group = ChatGroupSerializer(read_only=True)
     profile = UserProfileSerializer(read_only=True)
