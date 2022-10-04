@@ -10,13 +10,12 @@ from rest_framework import status
 from rest_framework.response import Response
 from .models import UserProfile
 from apps.user.models import UserAccount
-from .authentication import get_user_data, access_user_data
+from core.authentication import get_user_data, access_user_data
 # Create your views here.
 
 
 class UserProfileView(viewsets.GenericViewSet):
     model = UserProfile
-    model_user = UserAccount
     serializer_class = UserProfileSerializer
     update_serializer_class = UpdateUserProfileSerializer
     permission_classes = (IsAuthenticated,)

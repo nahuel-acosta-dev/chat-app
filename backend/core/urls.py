@@ -24,12 +24,14 @@ from rest_framework_extensions.routers import ExtendedSimpleRouter
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from apps.user_profile.views import UserProfileView
+from apps.chat_group.views import UserInChatGroupViewSet
 
 router: ExtendedSimpleRouter = ExtendedSimpleRouter()
 router = routers.DefaultRouter()
 
 router.register(r'profile', UserProfileView, basename='profile')
-
+router.register(r'user_in_group', UserInChatGroupViewSet,
+                basename='user_in_group')
 
 schema_view = get_schema_view(
     openapi.Info(

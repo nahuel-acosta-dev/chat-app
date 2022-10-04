@@ -20,9 +20,12 @@ def access_user_data(request, pk):
 
 def get_user_data(request):
     token = get_authorization_header(request).split()
-    access_token_obj = AccessToken(token[1])
-    user = access_token_obj['user_id']
-    if user:
-        return user
-    else:
+    try:
+        access_token_obj = AccessToken(token[1])
+        user = access_token_obj['user_id']
+        if user:
+            return user
+        else:
+            return False
+    except:
         return False
