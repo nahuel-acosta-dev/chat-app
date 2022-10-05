@@ -115,7 +115,7 @@ class UserInChatGroupViewSet(viewsets.GenericViewSet):
                 'error': 'does not have the permissions to perform this action'
             }, status=status.HTTP_406_NOT_ACCEPTABLE)
 
-    def update(self, request, pk):
+    def partial_update(self, request, pk):
         data = request.data
 
         # perfil de la persona que en teoria tendia que ser administrador y tener los permisos

@@ -18,7 +18,6 @@ class UserProfileView(viewsets.GenericViewSet):
     model = UserProfile
     serializer_class = UserProfileSerializer
     update_serializer_class = UpdateUserProfileSerializer
-    permission_classes = (IsAuthenticated,)
     queryset = None
 
     def get_object(self, pk):
@@ -40,7 +39,7 @@ class UserProfileView(viewsets.GenericViewSet):
         profiles_serializer = self.serializer_class(profile, many=True)
         return Response(profiles_serializer.data, status=status.HTTP_200_OK)
 
-    def update(self, request, pk=None):
+    def partial_update(self, request, pk=None):
         permission = access_user_data(request, int(pk) - 1)
         if permission != True:
             return permission
