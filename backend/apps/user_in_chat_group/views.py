@@ -1,14 +1,10 @@
 from rest_framework.response import Response
-from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from django.contrib.auth import authenticate
 from rest_framework.decorators import (api_view, permission_classes, action)
-from rest_framework import status
-from rest_framework import viewsets
-from core.authentication import get_user_data, access_user_data
+from rest_framework import viewsets, status
+from core.authentication import get_user_data, unauthorized
 from .serializers import (UserInChatGroupSerializer, CreateUserInChatGroupSerializer,
                           UpdateUserInChatGroupSerializer)
-from apps.user_profile.serializers import UserProfileSerializer
 from .models import UserInChatGroup
 from apps.chat_group.models import ChatGroup
 from apps.user_profile.models import UserProfile
@@ -55,10 +51,10 @@ class UserInChatGroupViewSet(viewsets.GenericViewSet):
         return self.queryset
 
     def retrieve(self, request, pk=None):
-        group = self.get_object(pk)
-        print(group.id)
-        group_serializer = self.serializer_class(group)
-        return Response(group_serializer.data, status=status.HTTP_200_OK)
+        user_in_chat_group = self.get_object(pk)
+        user_in_chat_group_serializer = self.serializer_class(
+            user_in_chat_group)
+        return Response(user_in_chat_group_serializer.data, status=status.HTTP_200_OK)
 
     def list(self, request):
         user_profile = self.get_user_profile(request)
@@ -79,9 +75,7 @@ class UserInChatGroupViewSet(viewsets.GenericViewSet):
         profile_authenticate = self.get_user_profile(request)
 
         if profile_authenticate == False:
-            return Response({
-                'error': 'You are not authorized to perform this action'
-            }, status=status.HTTP_401_UNAUTHORIZED)
+            return unauthorized()
 
         chat_group = self.model_chat_group.objects.get(
             id=int(data['chat_group']))
@@ -123,9 +117,7 @@ class UserInChatGroupViewSet(viewsets.GenericViewSet):
         profile_authenticate = self.get_user_profile(request)
 
         if profile_authenticate == False:
-            return Response({
-                'error': 'You are not authorized to perform this action'
-            }, status=status.HTTP_401_UNAUTHORIZED)
+            return unauthorized()
         # obtenemos el user_grupo que deseamos modificar en el grupo
         user_group = self.get_object(pk)
 
@@ -153,9 +145,7 @@ class UserInChatGroupViewSet(viewsets.GenericViewSet):
         profile_authenticate = self.get_user_profile(request)
 
         if profile_authenticate == False:
-            return Response({
-                'error': 'You are not authorized to perform this action'
-            }, status=status.HTTP_401_UNAUTHORIZED)
+            return unauthorized()
 
         try:
             user_in_group = self.model.objects.get(id=int(pk))

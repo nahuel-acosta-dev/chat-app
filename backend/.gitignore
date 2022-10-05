@@ -7,6 +7,10 @@ __pycache__/
 *.so
 db.py
 # Distribution / packaging
+/.migrations
+/migrations
+migrations/
+.migrations
 .Python
 build/
 develop-eggs/

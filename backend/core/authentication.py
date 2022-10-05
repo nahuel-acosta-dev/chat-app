@@ -29,3 +29,9 @@ def get_user_data(request):
             return False
     except:
         return False
+
+
+def unauthorized():
+    return Response({
+        'error': 'You are not authorized to perform this action'
+    }, status=status.HTTP_401_UNAUTHORIZED)
