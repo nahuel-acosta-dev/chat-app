@@ -9,18 +9,18 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ('chat_group', '0001_initial'),
         ('user_profile', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ChatGroup',
+            name='UserInChatGroup',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('chat_group_name', models.TextField(max_length=100)),
-                ('photo', models.ImageField(blank=True, null=True, upload_to='photos/%Y/%m/')),
-                ('description', models.TextField(blank=True, help_text='description of the group')),
-                ('creator_user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='user_profile.userprofile')),
+                ('admin', models.BooleanField(default=False)),
+                ('chat_group', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='chat_group.chatgroup')),
+                ('profile', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='user_profile.userprofile')),
             ],
         ),
     ]

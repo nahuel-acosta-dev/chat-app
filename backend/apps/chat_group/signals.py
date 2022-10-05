@@ -1,5 +1,6 @@
 from django.db.models.signals import post_save
-from .models import ChatGroup, UserInChatGroup
+from .models import ChatGroup
+from apps.user_in_chat_group.models import UserInChatGroup
 from django.dispatch import receiver
 
 
