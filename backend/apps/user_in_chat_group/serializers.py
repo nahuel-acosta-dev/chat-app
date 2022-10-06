@@ -23,3 +23,11 @@ class UserInChatGroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserInChatGroup
         fields = '__all__'
+
+
+class ListUserInChatGroupSerializer(serializers.ModelSerializer):
+    profile = UserProfileSerializer(read_only=True)
+
+    class Meta:
+        model = UserInChatGroup
+        fields = ('profile', 'admin', )

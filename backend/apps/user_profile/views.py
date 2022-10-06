@@ -40,7 +40,7 @@ class UserProfileView(viewsets.GenericViewSet):
         return Response(profiles_serializer.data, status=status.HTTP_200_OK)
 
     def partial_update(self, request, pk=None):
-        permission = access_user_data(request, int(pk) - 1)
+        permission = access_user_data(request, int(pk))
         if permission != True:
             return permission
         data = request.data
