@@ -5,7 +5,7 @@ from apps.user.models import UserAccount
 from apps.user_profile.models import UserProfile
 from apps.user_in_chat_group.models import UserInChatGroup
 from apps.user_in_chat_group.serializers import ListUserInChatGroupSerializer, UserInChatGroupSerializer
-from .serializers import ChatGroupSerializer, ListChatGroupSerializer
+from .serializers import ChatGroupSerializer, ListChatGroupSerializer, CreateChatGroupSerializer
 from rest_framework.response import Response
 from core.authentication import get_user_data, unauthorized
 # Create your views here.
@@ -18,6 +18,7 @@ class ChatGroupViewSet(viewsets.GenericViewSet):
     model_profile = UserProfile
     serializer_class = ChatGroupSerializer
     list_serializer_class = ListChatGroupSerializer
+    create_serializer_class = CreateChatGroupSerializer
     user_in_chat_group_serializer_class = UserInChatGroupSerializer
     list_user_in_chat_group_serializer_class = ListUserInChatGroupSerializer
     queryset = None
@@ -43,6 +44,11 @@ class ChatGroupViewSet(viewsets.GenericViewSet):
                 .filter(profile=user_profile)
         return self.queryset
 
+    def get_serializer_class(self):
+        if self.action in ["create"]:
+            return self.create_serializer_class
+        return self.serializer_class
+
     def retrieve(self, request, pk=None):
         group = self.get_object(pk)
         users_in_chat_group = self.model_user_in_chat_group.objects.filter(
@@ -63,3 +69,29 @@ class ChatGroupViewSet(viewsets.GenericViewSet):
             return Response(chat_groups_serializer.data, status=status.HTTP_200_OK)
         else:
             return unauthorized()
+
+    def create(self, request):
+        user_profile = self.get_user_profile(request)
+        data = request.data
+        try:
+            if user_profile:
+                try:
+                    chat_group = self.model.objects.create(creator_user=user_profile,
+                                                           chat_group_name=data['chat_group_name'],
+                                                           photo=data['photo'],
+                                                           description=data['description'])
+                except:
+                    chat_group = self.model.objects.create(creator_user=user_profile,
+                                                           chat_group_name=data['chat_group_name'],
+                                                           description=data['description'])
+                serializer_class = self.get_serializer_class()
+                chat_group_serializer = serializer_class(
+                    chat_group)
+                return Response(
+                    chat_group_serializer.data, status=status.HTTP_201_CREATED
+                )
+
+            else:
+                return unauthorized()
+        except:
+            return Response({'error': 'Invalid data'}, status=status.HTTP_404_NOT_FOUND)
