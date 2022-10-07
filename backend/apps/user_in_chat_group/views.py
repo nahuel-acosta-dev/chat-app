@@ -63,11 +63,7 @@ class UserInChatGroupViewSet(viewsets.GenericViewSet):
             groups_serializer = self.serializer_class(groups, many=True)
             return Response(groups_serializer.data, status=status.HTTP_200_OK)
         else:
-            return Response(
-                {
-                    'error': 'Unauthorized'
-                }, status=status.HTTP_401_UNAUTHORIZED
-            )
+            return unauthorized()
 
     # @action(detail=False, methods=["post"], serializer_class=create_serializer_class)
     def create(self, request):
