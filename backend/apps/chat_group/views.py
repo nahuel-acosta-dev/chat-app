@@ -112,7 +112,6 @@ class ChatGroupViewSet(viewsets.GenericViewSet):
             return unauthorized()
 
     def update(self, request, pk=None):
-        print(request)
         user_profile = self.get_user_profile(request)
         data = request.data
         chat_group = self.get_object(pk)
@@ -161,4 +160,20 @@ class ChatGroupViewSet(viewsets.GenericViewSet):
                 chat_group_serializer.data, status=status.HTTP_200_OK
             )
         except:
-            return Response({'error': 'Missing fields to complete'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Missing fields to complete'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+    def destroy(self, request, pk=None):
+        user_profile = self.get_user_profile(request)
+        chat_group = self.get_object(pk)
+        if user_profile == False or self.check_permissions(chat_group, user_profile) == False:
+            return unauthorized()
+        elif chat_group.creator_user != user_profile:
+            return unauthorized()
+
+        try:
+            chat_group.delete()
+            return Response({'success': 'deleted group'}, status=status.HTTP_200_OK)
+        except:
+            return Response({
+                'error': 'An error occurred while trying to delete the group'
+            }, status=status.HTTP_400_BAD_REQUEST)
