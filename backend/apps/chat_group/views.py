@@ -5,7 +5,8 @@ from apps.user.models import UserAccount
 from apps.user_profile.models import UserProfile
 from apps.user_in_chat_group.models import UserInChatGroup
 from apps.user_in_chat_group.serializers import ListUserInChatGroupSerializer, UserInChatGroupSerializer
-from .serializers import ChatGroupSerializer, ListChatGroupSerializer, CreateChatGroupSerializer
+from .serializers import (ChatGroupSerializer, ListChatGroupSerializer, CreateChatGroupSerializer,
+                          UpdateChatGroupSerializer, UpdateChatGroupSerializer)
 from rest_framework.response import Response
 from core.authentication import get_user_data, unauthorized
 # Create your views here.
@@ -19,8 +20,9 @@ class ChatGroupViewSet(viewsets.GenericViewSet):
     serializer_class = ChatGroupSerializer
     list_serializer_class = ListChatGroupSerializer
     create_serializer_class = CreateChatGroupSerializer
+    update_serializer_class = UpdateChatGroupSerializer
     user_in_chat_group_serializer_class = UserInChatGroupSerializer
-    list_user_in_chat_group_serializer_class = ListUserInChatGroupSerializer
+    user_in_chat_group_list_serializer_class = ListUserInChatGroupSerializer
     queryset = None
 
     def get_user_profile(self, request):
@@ -35,6 +37,17 @@ class ChatGroupViewSet(viewsets.GenericViewSet):
         except:
             return False
 
+    def check_permissions(self, chat_group=None, profile=None):
+        if chat_group is None or profile is None:
+            return False
+        if self.model_user_in_chat_group.objects.filter(chat_group=chat_group,
+                                                        profile=profile,
+                                                        admin=True
+                                                        ).exists():
+            return True
+        else:
+            return False
+
     def get_object(self, pk):
         return get_object_or_404(self.model, pk=pk)
 
@@ -47,13 +60,15 @@ class ChatGroupViewSet(viewsets.GenericViewSet):
     def get_serializer_class(self):
         if self.action in ["create"]:
             return self.create_serializer_class
+        elif self.action in ["update"] or self.action in ["partial_update"]:
+            return self.update_serializer_class
         return self.serializer_class
 
     def retrieve(self, request, pk=None):
         group = self.get_object(pk)
         users_in_chat_group = self.model_user_in_chat_group.objects.filter(
             chat_group=group)
-        users_in_chat_group_serializer = self.list_user_in_chat_group_serializer_class(
+        users_in_chat_group_serializer = self.user_in_chat_group_list_serializer_class(
             users_in_chat_group, many=True
         )
         group_serializer = self.serializer_class(
@@ -73,8 +88,9 @@ class ChatGroupViewSet(viewsets.GenericViewSet):
     def create(self, request):
         user_profile = self.get_user_profile(request)
         data = request.data
-        try:
-            if user_profile:
+
+        if user_profile:
+            try:
                 try:
                     chat_group = self.model.objects.create(creator_user=user_profile,
                                                            chat_group_name=data['chat_group_name'],
@@ -90,8 +106,59 @@ class ChatGroupViewSet(viewsets.GenericViewSet):
                 return Response(
                     chat_group_serializer.data, status=status.HTTP_201_CREATED
                 )
+            except:
+                return Response({'error': 'Invalid data'}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            return unauthorized()
 
+    def update(self, request, pk=None):
+        print(request)
+        user_profile = self.get_user_profile(request)
+        data = request.data
+        chat_group = self.get_object(pk)
+        check_permissions = self.check_permissions(chat_group, user_profile)
+        if user_profile == False or check_permissions == False:
+            return unauthorized()
+        try:
+            if 'photo' in data:
+                chat_group.chat_group_name = data['chat_group_name']
+                chat_group.description = data['description']
+                chat_group.photo = data['photo']
             else:
-                return unauthorized()
+                chat_group.chat_group_name = data['chat_group_name']
+                chat_group.description = data['description']
+            chat_group.save()
+            serializer_class = self.get_serializer_class()
+            chat_group_serializer = serializer_class(
+                chat_group)
+            return Response(
+                chat_group_serializer.data, status=status.HTTP_200_OK
+            )
         except:
-            return Response({'error': 'Invalid data'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'error': 'Missing fields to complete'}, status=status.HTTP_400_BAD_REQUEST)
+
+    def partial_update(self, request, pk):
+        user_profile = self.get_user_profile(request)
+        data = request.data
+        chat_group = self.get_object(pk)
+        if user_profile == False or self.check_permissions(chat_group, user_profile) == False:
+            return unauthorized()
+        try:
+
+            if 'photo' in data:
+                chat_group.photo = data['photo']
+            if 'chat_group_name' in data:
+                chat_group.chat_group_name = data['chat_group_name']
+            if 'description' in data:
+                chat_group.description = data['description']
+
+            chat_group.save()
+            serializer_class = self.get_serializer_class()
+            chat_group_serializer = serializer_class(
+                chat_group)
+
+            return Response(
+                chat_group_serializer.data, status=status.HTTP_200_OK
+            )
+        except:
+            return Response({'error': 'Missing fields to complete'}, status=status.HTTP_400_BAD_REQUEST)

@@ -46,6 +46,13 @@ class CreateChatGroupSerializer(serializers.ModelSerializer):
         fields = ('chat_group_name', 'photo', 'description')
 
 
+class UpdateChatGroupSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ChatGroup
+        fields = ('chat_group_name', 'photo', 'description')
+
+
 class ListChatGroupSerializer(serializers.ModelSerializer):
     chat_group = ListUsersInChatGroupSerializer(read_only=True)
 

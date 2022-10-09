@@ -25,7 +25,7 @@ class UserInChatGroupViewSet(viewsets.GenericViewSet):
     def get_serializer_class(self):
         if self.action in ["create"]:
             return self.create_serializer_class
-        elif self.action in ["update"]:
+        elif self.action in ["partial_update"]:
             return self.update_serializer_class
         return self.serializer_class
 
