@@ -1,5 +1,4 @@
 import {createSlice} from "@reduxjs/toolkit";
-import { Type } from "typescript";
 
 const authSlice = createSlice({
     name: 'auth',
@@ -29,5 +28,6 @@ export default authSlice.reducer;
 
 //export const selectCurrentUser = (state: {auth: {user: Object}): string => state.auth.user;
 //export const selectCurrentToken = (state: {token: string}): string => state.token;
+//export const selectCurrentUser = (state: Type) => state.auth.user;
 export const selectCurrentToken = (state: any): string => state.token; 
 //cambiar por el tipo de dato correspondiente

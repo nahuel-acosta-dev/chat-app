@@ -10,7 +10,7 @@ export const baseQuery = fetchBaseQuery({
         if(token) {
             headers.set("Content-Type", "application/json");
             headers.set("Accept", "*/*");
-            headers.set("Authorization", `Bearer ${token}`);//si no funciona probar authorization
+            headers.set("Authorization", `JWT ${token}`);//si no funciona probar authorization
         }
         return headers;
     }
