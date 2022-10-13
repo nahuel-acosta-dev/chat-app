@@ -56,7 +56,8 @@ if not DEBUG:
     EMAIL_PORT = env('EMAIL_PORT')
     EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 
-#ALLOWED_HOSTS = ['*']
+
+CORS_ALLOW_CREDENTIALS = True
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
@@ -74,6 +75,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 ALLOWED_HOSTS = ['localhost', '0.0.0.0',
                  '127.0.0.1', '']
+
 
 # Application definition
 
