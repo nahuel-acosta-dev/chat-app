@@ -2,12 +2,12 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const authSlice = createSlice({
     name: 'auth',
-    initialState:{user: null, token: null, refresh: null},
+    initialState:{token: null, refresh: null},
     reducers:{
         setCredentials: (state, action) => {
-            const {token, refresh_token, access, refresh} = action.payload;
-            state.token = token ? token : access;
-            state.refresh = refresh_token ? refresh_token : refresh;
+            const {access, refresh} = action.payload;
+            state.token = access;
+            state.refresh = refresh;
             //llenamos credenciales y guardamos en localStorage
             localStorage.removeItem("authTokens");
             localStorage.setItem("authTokens", JSON.stringify(action.payload));
@@ -29,5 +29,7 @@ export default authSlice.reducer;
 //export const selectCurrentUser = (state: {auth: {user: Object}): string => state.auth.user;
 //export const selectCurrentToken = (state: {token: string}): string => state.token;
 //export const selectCurrentUser = (state: Type) => state.auth.user;
-export const selectCurrentToken = (state: any): string => state.token; 
+export const selectCurrentToken = (state: any): string => {
+    console.log(state)
+    return state.auth.token; }
 //cambiar por el tipo de dato correspondiente

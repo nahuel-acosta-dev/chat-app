@@ -9,8 +9,7 @@ type Props = {
 
 const PublicRoutes = ({children}: Props) =>{
     const token = useSelector(selectCurrentToken);
-
-    return (token) ? <Navigate to="/app/home" /> : children;
+    return token ? <h2>Navigate to=/app/home"</h2> : children;
 }
 
 export default PublicRoutes;

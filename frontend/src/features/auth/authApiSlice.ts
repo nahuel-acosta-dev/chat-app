@@ -1,10 +1,12 @@
 import { apiSlice } from "../../app/api/apiSlice";
 
+console.log('estoy aca')
+
 export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         login: builder.mutation({
             query: credentials => ({
-                url: 'auth/login/',
+                url: 'auth/jwt/create/',
                 method: 'POST',
                 body: { ...credentials }
             })
