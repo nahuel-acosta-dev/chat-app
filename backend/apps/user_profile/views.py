@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate
 from rest_framework.decorators import (api_view, permission_classes,
                                        action)
 from rest_framework import viewsets
+from core.authentication import unauthorized
+from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework.response import Response
@@ -16,9 +18,22 @@ from core.authentication import get_user_data, access_user_data
 
 class UserProfileView(viewsets.GenericViewSet):
     model = UserProfile
+    model_user = UserAccount
     serializer_class = UserProfileSerializer
     update_serializer_class = UpdateUserProfileSerializer
     queryset = None
+
+    def get_user_profile(self, request):
+        user_id = get_user_data(request)
+        try:
+            if user_id:
+                user = self.model_user.objects.get(id=user_id)
+                user_profile = self.model.objects.get(user=user)
+                return user_profile
+            else:
+                return False
+        except:
+            return False
 
     def get_object(self, pk):
         return get_object_or_404(self.model, pk=pk)
@@ -28,6 +43,16 @@ class UserProfileView(viewsets.GenericViewSet):
             self.queryset = self.serializer_class().Meta.model.objects\
                 .all()
         return self.queryset
+
+    @action(detail=False, methods=['GET'], url_name='me',
+            url_path='me')
+    def profile_me(self, request, *args, **kwargs):
+        profile = self.get_user_profile(request)
+        if profile:
+            profile_serializer = self.serializer_class(profile)
+            return Response(profile_serializer.data, status=status.HTTP_200_OK)
+        else:
+            return unauthorized()
 
     def retrieve(self, request, pk=None):
         profile = self.get_object(pk)
