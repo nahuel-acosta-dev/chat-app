@@ -1,6 +1,7 @@
 
 import {Routes,Route} from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
+import AppHome from '../pages/AppHome';
 
 const ApplicationRouter = () =>{
     //Aqui van las rutas que puede ver el usuario logueado
@@ -8,7 +9,7 @@ const ApplicationRouter = () =>{
     return (
         <>
             <Routes>
-                <Route path="" element={<Navigate to="/home"/>} />
+                <Route path="home" element={<AppHome/>} />
             </Routes>
         </>
     )

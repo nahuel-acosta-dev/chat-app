@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import { Outlet } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import { setCredentials } from '../../features/auth/authSlice';
+import {Tokens} from '../../types/auth/Tokens';
 import { Type } from 'typescript';
 //cambiar nombre a PersistLogin, y enviar a carpeta features/auth
 //guardar tokens en cookies una vez abierta la sesion.
@@ -10,7 +11,7 @@ import { Type } from 'typescript';
 
 const PersistLogin = () => {
     const dispatch = useDispatch();
-    let [authTokens, setAuthTokens] = useState<Type | null>(()=> localStorage.getItem("authTokens") ? 
+    let [authTokens, setAuthTokens] = useState<Tokens | null>(()=> localStorage.getItem("authTokens") ? 
     JSON.parse(localStorage.getItem("authTokens") || "[]") : null);
     
     useEffect(() =>  {

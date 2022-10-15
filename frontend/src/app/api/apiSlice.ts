@@ -1,5 +1,5 @@
 // Need to use the React-specific entry point to import createApi
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi, FetchArgs, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import {setCredentials, logOut} from '../../features/auth/authSlice';
 // Define a service using a base URL and expected endpoints
 console.log('estoy aca tambien')
@@ -18,7 +18,8 @@ export const baseQuery = fetchBaseQuery({
 
 })
 
-const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
+const baseQueryWithReauth = async (args: FetchArgs | string, api: any, extraOptions: any) => {
+console.log(api)
   let result = await baseQuery(args, api, extraOptions);
   if (result?.error?.status === 401 || result?.error?.status === 403){
       console.log('sending refresh token');
@@ -28,10 +29,11 @@ const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
           "refresh": refresh
       }}, api, extraOptions)
       if (refreshResult?.data){
+        /*
           const user = api.getState().auth.user;
           // store the new token
           api.dispatch(setCredentials({...refreshResult.data, user}))
-          //retry the original query with new access Token
+          //retry the original query with new access Token*/
           result = await baseQuery(args, api, extraOptions);
       }
       else{
