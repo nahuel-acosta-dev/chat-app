@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import { Outlet } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import { setCredentials } from '../../features/auth/authSlice';
-import {Tokens} from '../../types/auth/Tokens';
+import {Tokens} from '../../types/tokens';
 import { Type } from 'typescript';
 //cambiar nombre a PersistLogin, y enviar a carpeta features/auth
 //guardar tokens en cookies una vez abierta la sesion.

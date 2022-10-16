@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {Tokens} from '../../types/auth/Tokens';
+import {Tokens, Auth} from '../../types/tokens';
 
 const authSlice = createSlice({
     name: 'auth',
@@ -13,7 +13,7 @@ const authSlice = createSlice({
             localStorage.removeItem("authTokens");
             localStorage.setItem("authTokens", JSON.stringify(action.payload));
         },
-        logOut: (state, action) => {
+        logOut: (state) => {
             //limpiamos credenciales y localStorage
             state.token = null;
             state.refresh = null;
@@ -27,10 +27,7 @@ export const {setCredentials, logOut} = authSlice.actions;
 
 export default authSlice.reducer;
 
-//export const selectCurrentUser = (state: {auth: {user: Object}): string => state.auth.user;
-//export const selectCurrentToken = (state: {token: string}): string => state.token;
-//export const selectCurrentUser = (state: Type) => state.auth.user;
-export const selectCurrentToken = (state: any): string => {
+export const selectCurrentToken = (state: Auth): string => {
     console.log(state)
     return state.auth.token; }
 //cambiar por el tipo de dato correspondiente
