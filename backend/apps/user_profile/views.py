@@ -48,11 +48,14 @@ class UserProfileView(viewsets.GenericViewSet):
             url_path='me')
     def profile_me(self, request, *args, **kwargs):
         profile = self.get_user_profile(request)
-        if profile:
-            profile_serializer = self.serializer_class(profile)
-            return Response(profile_serializer.data, status=status.HTTP_200_OK)
-        else:
-            return unauthorized()
+        try:
+            if profile:
+                profile_serializer = self.serializer_class(profile)
+                return Response(profile_serializer.data, status=status.HTTP_200_OK)
+            else:
+                return unauthorized()
+        except:
+            return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def retrieve(self, request, pk=None):
         profile = self.get_object(pk)

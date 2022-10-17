@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {Profile} from '../../types/profile';
+import {Profile, User, ProfileUser} from '../../types/profile';
 
 const profile = createSlice({
     name: 'profile',
@@ -11,14 +11,19 @@ const profile = createSlice({
         state.user = user; //
         state.photo = photo;
       },
+      clearProfile: (state) => {
+          state.id = null;
+          state.user = null;
+          state.photo = null;
+      }
     },
   })
 
-  export const {setProfile} = profile.actions;
+  export const {setProfile, clearProfile} = profile.actions;
 
   export default profile.reducer;
   
 
-  export const selectCurrentToken = (state: {profile: Profile}): Profile => {
-    console.log(state)
+  export const selectCurrentProfile = (state: {profile: ProfileUser}): ProfileUser => {
+    console.log(state.profile.id)
     return state.profile; }

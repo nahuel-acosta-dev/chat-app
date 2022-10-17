@@ -31,7 +31,7 @@ FetchBaseQueryError
       const appState = api.getState() as AppState;
       const refresh = appState.auth.refresh;
       // send refresh token to get new acces token
-      const refreshResult = await baseQuery({url:'jwt/refresh/', method:'POST', body: {
+      const refreshResult = await baseQuery({url:'auth/jwt/refresh/', method:'POST', body: {
           "refresh": refresh
       }}, api, extraOptions)
       if (refreshResult?.data){
