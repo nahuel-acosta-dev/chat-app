@@ -1,7 +1,7 @@
-interface User{
+export interface User{
     "email": string,
     "first_name": string,
-    "last_name": string
+    "last_name":string
 }
 
 export interface Profile {
@@ -9,3 +9,9 @@ export interface Profile {
     "user": null,
     "photo": null
   }
+
+export interface ProfileUser{
+    "id": number,
+    "user": User,
+    "photo": string | null
+}

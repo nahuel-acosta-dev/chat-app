@@ -13,8 +13,8 @@ const HelperRouters = () =>{
     return (
       <Routes>
       <Route path="*" element={<Error404/>}></Route>
-      <Route index element={<Home/>} />
       <Route path="/" element={<PersistLogin />}>
+        <Route index element={<Home/>} />
           {/* public routes */}
           <Route path="auth/*" 
           element={
