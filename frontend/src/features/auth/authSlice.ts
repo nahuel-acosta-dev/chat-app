@@ -27,7 +27,5 @@ export const {setCredentials, logOut} = authSlice.actions;
 
 export default authSlice.reducer;
 
-export const selectCurrentToken = (state: Auth): string => {
-    console.log(state)
-    return state.auth.token; }
+export const selectCurrentToken = (state: Auth): string => state.auth.token;
 //cambiar por el tipo de dato correspondiente

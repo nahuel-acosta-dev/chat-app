@@ -18,7 +18,10 @@ export const baseQuery = fetchBaseQuery({
 
 })
 
-
+interface RefreshResult {
+      data?: any
+      meta?: any
+}
 
 const baseQueryWithReauth: BaseQueryFn<
 string | FetchArgs,
@@ -31,16 +34,21 @@ FetchBaseQueryError
       const appState = api.getState() as AppState;
       const refresh = appState.auth.refresh;
       // send refresh token to get new acces token
-      const refreshResult = await baseQuery({url:'auth/jwt/refresh/', method:'POST', body: {
+      const refreshResult: RefreshResult = await baseQuery({url:'auth/jwt/refresh/', method:'POST', body: {
           "refresh": refresh
-      }}, api, extraOptions)
+      }}, api, extraOptions);
+      
       if (refreshResult?.data){
-        /*
-          const user = api.getState().auth.user;
-          // store the new token
-          api.dispatch(setCredentials({...refreshResult.data, user}))
-          //retry the original query with new access Token*/
+        console.log(refreshResult)
+        console.log('se refresco el token');
+        /*const user = api.getState().auth.user;*/
+          api.dispatch(setCredentials({
+            ...refreshResult.data,
+            refresh: refresh
+          })); // store the new token
+          
           result = await baseQuery(args, api, extraOptions);
+          //retry the original query with new access Token
       }
       else{
           api.dispatch(logOut());

@@ -24,6 +24,4 @@ const profile = createSlice({
   export default profile.reducer;
   
 
-  export const selectCurrentProfile = (state: {profile: ProfileUser}): ProfileUser => {
-    console.log(state.profile.id)
-    return state.profile; }
+  export const selectCurrentProfile = (state: {profile: ProfileUser}): ProfileUser => state.profile; 

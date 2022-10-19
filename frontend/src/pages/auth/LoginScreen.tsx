@@ -18,7 +18,6 @@ const LoginScreen = () => {
     const navigate = useNavigate();
     const [login, { isLoading }] = useLoginMutation();
     const dispatch = useDispatch();
-    console.log('estoy aca')
 
     useEffect(() => {
         if (userRef.current !== null) {

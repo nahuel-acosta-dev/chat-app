@@ -1,7 +1,7 @@
 import Layout from "../hocs/Layout";
 import {useSelector} from 'react-redux';
 import { selectCurrentProfile } from '../features/profile/profileSlice';
-import {Profile, ProfileUser} from '../types/profile';
+import {ProfileUser} from '../types/profile';
 
 
 const AppHome = () => {
