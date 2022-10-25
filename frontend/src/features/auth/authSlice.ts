@@ -7,6 +7,7 @@ const authSlice = createSlice({
     reducers:{
         setCredentials: (state, action: PayloadAction<Tokens>) => {
             const {access, refresh} = action.payload;
+            console.log(access, refresh);
             state.token = access;
             state.refresh = refresh;
             //llenamos credenciales y guardamos en localStorage

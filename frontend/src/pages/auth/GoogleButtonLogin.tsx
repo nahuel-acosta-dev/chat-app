@@ -1,27 +1,48 @@
+import { useEffect, useRef, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { GoogleLogin } from 'react-google-login';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { selectCurrentToken } from '../../features/auth/authSlice';
+import axios from 'axios';
+import queryString from 'query-string';
 
+axios.defaults.withCredentials = true;
 
 const GoogleButtonLogin = () => {
-    let location = useLocation();
+  const errRef = useRef<HTMLInputElement>(null);
+  const [errMsg, setErrMsg] = useState<string>('');
+  let location = useLocation();
 
+  useEffect(() => {
+    const values = queryString.parse(location.search);
+    const error = values.error ? values.error : null;
 
-    const responseGoogle = (response: any) => {
-        console.log(response);
-      }
-      
+    console.log('error: ' + error);
 
-    return(
+    if (error) {
+      setErrMsg("Error signing in to Google");
+    }
+}, [location]);
 
-        <GoogleLogin
-            clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
-            buttonText="Login"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            cookiePolicy={'single_host_origin'}
-        />
+  const continueWithGoogle = async () => {
+    try {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?redirect_uri=http://localhost:3000/google/`);
+        window.location.replace(res.data.authorization_url);
+        console.log('error en el try');
+    } catch (err) {
+        console.log("Error logging in");
+        console.log('fallo en el catch');
+    }
+};
 
-    )
+  return(
+    <div>
+      <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+      <button className='btn btn-danger mt-3' onClick={continueWithGoogle}>
+          Continue With Google
+      </button>
+    </div>
+  )
 }
 
 export default GoogleButtonLogin;

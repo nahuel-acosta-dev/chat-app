@@ -60,9 +60,9 @@ const LoginScreen = () => {
         }
     }
 
-    const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
+    const handleEmailInput = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
 
-    const handlePwdInput = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
+    const handlePwdInput = (e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
 
 
     return (

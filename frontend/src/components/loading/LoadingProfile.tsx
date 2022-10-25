@@ -43,16 +43,16 @@ const LoadingProfile: FC<Props> = ({setLoading, setError}) => {
 
     return(
         error === undefined ? 
-        <>
+        <div>
             <Spinner animation="border" role="status">
                 <span className="visually-hidden">Loading...</span>
             </Spinner>
-        </>
+        </div>
         :
-        <>
+        <div>
           Ocurrio un error al intentar hacer una solicitud al servidor.
           Por favor recargue la pagina o intente ingresar mas tarde. 
-        </>
+        </div>
 
     )
 }

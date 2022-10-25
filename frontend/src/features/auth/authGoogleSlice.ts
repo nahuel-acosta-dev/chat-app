@@ -1,17 +1,19 @@
 import { apiSlice } from "../../app/api/apiSlice";
 
-export const authApiSlice = apiSlice.injectEndpoints({
+export const authGoogleSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        login: builder.mutation({
-            query: credentials => ({
-                url: 'auth/o/google/?${formBody}',
-                method: 'POST',
-                body: { ...credentials }
+        google: builder.mutation({
+            query: details => {
+                const formBody = Object.keys(details).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(details[key])).join('&');
+                return ({
+                url: `auth/o/google-oauth2/?${formBody}`,
+                method: 'POST'
             })
+        }
         }),
     })
 })
 
 export const {
-    useLoginMutation
-} = authApiSlice;
+    useGoogleMutation
+} = authGoogleSlice;

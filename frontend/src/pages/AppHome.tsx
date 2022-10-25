@@ -6,6 +6,9 @@ import {ProfileUser} from '../types/profile';
 
 const AppHome = () => {
     const profile: ProfileUser = useSelector(selectCurrentProfile);
+
+    console.log(profile);
+
     return(
         <Layout>
             {

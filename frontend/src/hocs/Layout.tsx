@@ -12,6 +12,7 @@ const Layout: FC<Props> = (props) => {
     const token = useSelector(selectCurrentToken);
     const [loading, setLoading] = useState<Boolean>(true);
     const [error, setError] = useState<Boolean>(false);
+    console.log(token)
     //si pongo el loading va a quedar siempre cargando ya que nunca entra NavBarLogged
     //En navbar logged no lo puedo poner ya que la barra de navegacion seria la unica en la que aparesca
     //el spiner

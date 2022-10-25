@@ -4,6 +4,7 @@ import Home from '../pages/Home';
 import RequireAuth from '../hocs/auth/RequireAuth';
 import PersistLogin from '../hocs/auth/PersistLogin';
 import PublicRoutes from './PublicRoutes';
+import GoogleRedirect from '../pages/auth/GoogleRedirect';
 import ApplicationRouter from './ApplicationRouter';
 import Error404 from '../pages/error/Error404'
 
@@ -14,6 +15,7 @@ const HelperRouters = () =>{
       <Routes>
       <Route path="*" element={<Error404/>}></Route>
       <Route path="/" element={<PersistLogin />}>
+      <Route path="/google" element={<GoogleRedirect />}/>
         <Route index element={<Home/>} />
           {/* public routes */}
           <Route path="auth/*" 
