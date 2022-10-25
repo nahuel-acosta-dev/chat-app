@@ -58,7 +58,7 @@ if not DEBUG:
 
 
 CORS_ALLOW_CREDENTIALS = True
-
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
     'http://localhost:8000',
@@ -72,6 +72,7 @@ CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:3000',
     'http://127.0.0.1:8000',
 ]
+
 
 ALLOWED_HOSTS = ['localhost', '0.0.0.0',
                  '127.0.0.1', '']
@@ -178,7 +179,7 @@ AUTHENTICATION_BACKENDS = (
 
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT', ),
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
     'ROTATE_REFRESFH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
@@ -200,7 +201,11 @@ DJOSER = {
     'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
     'SOCIAL_AUTH_TOKEN_STRATEGY': 'djoser.social.token.jwt.TokenStrategy',
-    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['http://localhost:8000/google', 'http://localhost:8000/facebook', 'http://127.0.0.1:8000/google', 'http://127.0.0.1:3000', 'http://127.0.0.1:3000/home', 'http://127.0.0.1:3000/login'],
+    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['http://localhost:8000/google',
+                                          'http://127.0.0.1:8000/google',
+                                          'http://localhost:8000/login',
+                                          'http://127.0.0.1:3000/google',
+                                          'http://localhost:3000/google/'],
     'SERIALIZERS': {
         'user_create': 'accounts.serializers.UserCreateSerializer',
         'user': 'apps.user.serializers.UserCreateSerializer',
@@ -212,7 +217,8 @@ DJOSER = {
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('GG_CLIENT_ID')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('GG_SECRET_CLIENT')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['https://www.googleapis.com/auth/userinfo.email',
-                                   'https://www.googleapis.com/auth/userinfo.profile', 'openid']
+                                   'https://www.googleapis.com/auth/userinfo.profile',
+                                   'openid']
 SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ['first_name', 'last_name']
 ################################################################
 
