@@ -3,9 +3,9 @@ import Loading from '../loading/Loading';
 import { ListGroup } from "react-bootstrap";
 import { ChatType } from "../../types/chat";
 import { useGetListChatQuery } from "../../features/chat_group/getListChat";
+import { Link } from "react-router-dom";
 
 const Chat = () => {
-    const [arrChat, setArrChat] = useState<Array<any>>([]);
     const {
         data: chats,
         isLoading,
@@ -15,26 +15,6 @@ const Chat = () => {
         refetch
     } = useGetListChatQuery(null);
     
-    console.log(arrChat)
-
-    const filterChats = () =>{
-        const filter: Array<any> = [];
-
-        for(let chat of chats) {
-            if(chat in filter) continue;
-            else {
-                console.log(chat)
-                filter.push(chat);
-            }
-        }
-        return filter;
-    }
-
-
-    useEffect(() =>  {
-        if(isSuccess) setArrChat(filterChats);
-
-    }, [isLoading, isSuccess])
 
     return(
         <ListGroup variant="flush">
@@ -43,18 +23,22 @@ const Chat = () => {
                     <Loading/> 
                 :
                 isSuccess ? 
-                    arrChat.map((group:  ChatType) => 
+                    chats.map((group:  ChatType) => 
                         (
                         <ListGroup.Item key={group['id']}>
-                            {
-                                group['chat_name']
-                            }
+                            <Link to={`/app/chat/${group['chat_name']}`}>
+                                {
+                                    group['chat_name']
+                                }
+                            </Link>
                         </ListGroup.Item>
                         )
                     )
                 :
                 isError &&
-                    <div>Ocurrio un error al cargar Los Mensajes</div>
+                    <div>
+                        Ocurrio un error al cargar Los Mensajes
+                    </div>
             } 
         </ListGroup>
     )
