@@ -5,13 +5,14 @@ from apps.user_profile.models import UserProfile
 
 class ChatModel(models.Model):
     send = models.ForeignKey(
-        UserProfile, on_delete=models.CASCADE, blank=False, related_name="chat_user1")
+        UserProfile, on_delete=models.CASCADE, blank=False, related_name="chat_send")
     receive = models.ForeignKey(
-        UserProfile, on_delete=models.CASCADE, blank=False, related_name="chat_user2")
+        UserProfile, on_delete=models.CASCADE, blank=False, related_name="chat_receive")
     message = models.TextField(max_length=500, blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def chat_name(self):
+        # aca es punto clave
         if self.send.user_id > self.receive.user_id:
             return f"chat_{self.receive.user_id}_{self.send.user_id}"
         else:
