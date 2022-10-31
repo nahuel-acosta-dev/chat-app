@@ -16,9 +16,3 @@ class ChatGroup(models.Model):
 
     def __str__(self):
         return f"{self.chat_group_name}"
-
-
-class MessageInChatGroup(models.Model):
-    chat_group = models.ForeignKey(ChatGroup, on_delete=models.CASCADE)
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
-    message = models.TextField(blank=False, max_length=255)
