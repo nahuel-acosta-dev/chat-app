@@ -27,6 +27,7 @@ from apps.user_profile.views import UserProfileView
 from apps.user_in_chat_group.views import UserInChatGroupViewSet
 from apps.chat_group.views import ChatGroupViewSet
 from apps.chat.views import ChatViewSet
+from apps.message_in_chat_group.views import MessageInChatGroupViewSet
 
 router: ExtendedSimpleRouter = ExtendedSimpleRouter()
 router = routers.DefaultRouter()
@@ -36,6 +37,8 @@ router.register(r'user_in_group', UserInChatGroupViewSet,
                 basename='user_in_group')
 router.register(r'chat', ChatViewSet, basename='chat')
 router.register(r'chat_group', ChatGroupViewSet, basename='chat_group')
+router.register(r'messages_in_group', MessageInChatGroupViewSet,
+                basename='messages_in_group')
 
 schema_view = get_schema_view(
     openapi.Info(
