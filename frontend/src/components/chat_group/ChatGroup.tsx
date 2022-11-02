@@ -27,7 +27,7 @@ const ChatGroup = () => {
                         groups.map((group:  ChatGroupType) => 
                             (
                                 <ListGroup.Item key={group['chat_group']['id']}>
-                                    <Link to={`/app/chat/chat_group_${group['chat_group']['id']}`}>
+                                    <Link to={`/app/chat_group/chat_group_${group['chat_group']['id']}`}>
                                         {group['chat_group']['chat_group_name']}
                                     </Link>
                                 </ListGroup.Item>
