@@ -44,10 +44,12 @@ class ChatViewSet(viewsets.GenericViewSet):
     def get_queryset(self, user_profile=None):
         if self.queryset is None:
             messages = []
+            chat_names = []
             for chat in self.list_serializer_class().Meta.model.objects\
                     .filter(Q(send=user_profile) | Q(receive=user_profile)):
-                if chat.chat_name() not in messages:
+                if chat.chat_name() not in chat_names:
                     messages.append(chat.id)
+                    chat_names.append(chat.chat_name())
             self.queryset = self.list_serializer_class().Meta.model.objects\
                 .filter(id__in=messages)
         return self.queryset
