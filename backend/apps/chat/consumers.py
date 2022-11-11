@@ -45,11 +45,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
         send_type = text_data_json['send_type']
         message = text_data_json['message']
         send_user = text_data_json['send_user']
-        """
+
         if send_type == 'chat':
             await self.new_chat(message, send_user)
         elif send_type == 'chat_group':
-            await self.new_chat_group(message, send_user)"""
+            await self.new_chat_group(message, send_user)
 
         await self.channel_layer.group_send(
             self.chat_name,
