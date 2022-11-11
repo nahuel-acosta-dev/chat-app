@@ -13,10 +13,10 @@ class ChatModel(models.Model):
 
     def chat_name(self):
         # aca es punto clave
-        if self.send.user_id > self.receive.user_id:
-            return f"chat_{self.receive.user_id}_{self.send.user_id}"
+        if self.send.id > self.receive.id:
+            return f"chat_{self.receive.id}_{self.send.id}"
         else:
-            return f"chat_{self.send.user_id}_{self.receive.user_id}"
+            return f"chat_{self.send.id}_{self.receive.id}"
 
     def __str__(self):
         return self.chat_name()

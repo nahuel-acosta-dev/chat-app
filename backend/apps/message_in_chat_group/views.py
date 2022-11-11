@@ -23,6 +23,12 @@ class MessageInChatGroupViewSet(viewsets.GenericViewSet):
     def get_object(self, pk):
         return get_object_or_404(self.model_chat_group, pk=pk)
 
+    def get_queryset(self, user_profile=None):
+        if self.queryset is None:
+            self.queryset = self.serializer_class().Meta.model.objects\
+                .all()
+        return self.queryset
+
     def get_user_profile(self, request):
         user_id = get_user_data(request)
         try:

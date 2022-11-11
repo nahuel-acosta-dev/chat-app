@@ -81,6 +81,7 @@ ALLOWED_HOSTS = ['localhost', '0.0.0.0',
 # Application definition
 
 DJANGO_APPS = [
+    "daphne",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -105,7 +106,8 @@ THIRD_PARTY_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'drf_yasg',
-    'drf_spectacular'
+    'drf_spectacular',
+    'channels'
 ]
 
 
@@ -227,6 +229,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ['first_name', 'last_name']
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+ASGI_APPLICATION = "core.asgi.application"
+
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 AUTH_USER_MODEL = "user.UserAccount"
@@ -263,6 +267,13 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 
 # Static files (CSS, JavaScript, Images)
