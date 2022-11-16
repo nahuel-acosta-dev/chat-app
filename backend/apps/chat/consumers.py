@@ -25,8 +25,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.accept()
         self.user = self.scope["user"]
         print(self.user.email)
-        await self.send(text_data=json.dumps(
-            {"message": "Se ha conectado %s" % (self.user.email)}))
+        """await self.send(text_data=json.dumps(
+            {"message": "Se ha conectado %s" % (self.user.email)}))"""
 
     @sync_to_async
     def get_all_users(self):
