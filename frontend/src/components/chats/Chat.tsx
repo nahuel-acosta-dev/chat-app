@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
 import Loading from '../loading/Loading';
-import { ListGroup } from "react-bootstrap";
+import { ListGroup, Accordion, Row, Col } from "react-bootstrap";
+import ProfileImg from "../../img/profile.png";
 import { ChatType } from "../../types/chat";
 import { useGetListChatQuery } from "../../features/chat_group/getListChat";
 import { Link } from "react-router-dom";
+import {ProfileUser} from '../../types/profile';
+import { useSelector } from "react-redux";
+import { selectCurrentProfile } from "../../features/profile/profileSlice";
 
 const Chat = () => {
+    const profile: ProfileUser = useSelector(selectCurrentProfile);
+
     const {
         data: chats,
         isLoading,
@@ -14,10 +20,15 @@ const Chat = () => {
         error,
         refetch
     } = useGetListChatQuery(null);
+    console.log(profile)
+
+    console.log(chats)
     
 
     return(
-        <ListGroup variant="flush">
+        <Accordion.Item eventKey="0">
+            <Accordion.Header>Chats</Accordion.Header>
+            <Accordion.Body>
             {
                 isLoading ? 
                     <Loading/> 
@@ -25,13 +36,25 @@ const Chat = () => {
                 isSuccess ? 
                     chats.map((group:  ChatType) => 
                         (
-                        <ListGroup.Item key={group['id']}>
-                            <Link to={`/app/chat/${group['chat_name']}`}>
-                                {
-                                    group['chat_name']
-                                }
-                            </Link>
-                        </ListGroup.Item>
+                        <Link to={`/app/chat/${group['chat_name']}`} 
+                        className="text-decoration-none text-black" key={group['id']}>
+                            <Row className="alert alert-success chats">
+                                <Col xs={2} className="cont__profile">
+                                    <figure className="figure">
+                                        <img src={ProfileImg} height="50"
+                                        className="figure-img img-fluid rounded" alt="..."/>
+                                    </figure>
+                                </Col>
+                                <Col className="text-start d-flex align-items-center">
+                                    {
+                                    group.receive.id !== profile.id ?
+                                    `${group.receive.user.first_name} ${group.receive.user.last_name}`
+                                    :
+                                    `${group.send.user.first_name} ${group.send.user.last_name}`
+                                    }
+                                </Col>
+                            </Row>
+                        </Link>
                         )
                     )
                 :
@@ -40,7 +63,8 @@ const Chat = () => {
                         Ocurrio un error al cargar Los Mensajes
                     </div>
             } 
-        </ListGroup>
+            </Accordion.Body>
+        </Accordion.Item>
     )
 }
 

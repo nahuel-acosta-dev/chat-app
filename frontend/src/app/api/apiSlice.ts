@@ -13,9 +13,7 @@ export const baseQuery = fetchBaseQuery({
             headers.set('Accept', 'application/json');
             headers.set("Authorization", `JWT ${token}`);//si no funciona probar authorization
         }
-        else{
-          headers.set('Content-Type', 'application/x-www-form-urlencoded');
-        }
+        
         return headers;
     }
 

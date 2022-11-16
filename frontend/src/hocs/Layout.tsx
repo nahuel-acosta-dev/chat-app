@@ -26,11 +26,11 @@ const Layout: FC<Props> = (props) => {
                 <LoadingProfile setLoading={setLoading} setError={setError}/>
                 :
                 <>
-                    <header>  
+                    <header className="header">  
                         <NavBarLogged/>
                         <ToastContainer autoClose={4000} />
                     </header>
-                    <main>
+                    <main className="main">
                         {props.children}
                     </main>
                 </>

@@ -16,14 +16,12 @@ const LoginScreen = () => {
     const [password, setPassword] = useState<string>('');
     const [errMsg, setErrMsg] = useState<string>('');
     const navigate = useNavigate();
-    const [login, { isLoading }] = useLoginMutation();
+    const [login, { isLoading, isError }] = useLoginMutation();
     const dispatch = useDispatch();
 
+    console.log(isLoading);
     useEffect(() => {
-        if (userRef.current !== null) {
-            userRef.current.focus();
-        }
-
+        if (userRef.current !== null) {userRef.current.focus();}
     }, []);
 
     useEffect(() =>  {
@@ -32,23 +30,27 @@ const LoginScreen = () => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+        console.log('estoy aquired')
         try{
-            //llama a la api lofin
+            //llama a la api login
+            console.log(email);
+            console.log(password);
             const userData = await login({email, password}).unwrap();
             console.log(userData);
-            //guardamos los datos en las credebciales
+            console.log('estamos aca');
+            //guardamos los datos en las credenciales
             dispatch(setCredentials({ ...userData, email }));
             setEmail('');
             setPassword('');
-            navigate('/app/home')
+            navigate('/app/home');
         }catch(err: any){
-            console.log(err)
+            console.log(err);
+            console.log('entro aca');
             if (err.status === 400){
                 setErrMsg("Missing Email or Password");
             }
             else if (err.status === 401){
-                setErrMsg("Unauthorized");
+                setErrMsg("No se ha encontrado el usuario");
             }
             else {
                 setErrMsg("No server Response");
@@ -66,12 +68,12 @@ const LoginScreen = () => {
 
 
     return (
-        <>
+        <Layout>
         {
             isLoading ? 
             (<Loading/>)
             :
-            (<Layout>
+            (<>
                 <Auth>
                 <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <Form onSubmit={(e) => handleSubmit(e)}>
@@ -101,10 +103,10 @@ const LoginScreen = () => {
                         <Col sm={1}></Col>
                     </Row>
                     </Auth> 
-                </Layout>
+                </>
         )
     }
-    </>
+    </Layout>
     )
 }
 

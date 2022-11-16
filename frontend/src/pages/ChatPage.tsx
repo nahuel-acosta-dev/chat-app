@@ -5,6 +5,10 @@ import NewChats from '../components/chats/NewChats';
 import { useParams } from "react-router-dom";
 import {usePostChatListMutation} from '../features/chat/postChatList';
 import Layout from "../hocs/Layout";
+import { useSelector } from "react-redux";
+import { selectCurrentProfile } from "../features/profile/profileSlice";
+import { ProfileUser } from "../types/profile";
+import { Row } from "react-bootstrap";
 
 const Chat = () => {
     const [chatListQuery, { isLoading, isSuccess, isError, isUninitialized }] = usePostChatListMutation();
@@ -13,13 +17,14 @@ const Chat = () => {
     const errRef = useRef<HTMLInputElement>(null);
     const [chatList, setChatList] = useState<any>(null);
     const {number} = useParams();
+    const profile: ProfileUser = useSelector(selectCurrentProfile);
     const socketChat = new WebSocket(`ws://${process.env.REACT_APP_API_LOCAL_URL}/ws/chat/${number}/`);
-
 
 
     const postChatList = async () => {
         try{
             const data = await chatListQuery({"chat_name": number});
+            console.log('aqui')
             console.log(data);
             setChatList(data);
         }
@@ -41,7 +46,7 @@ const Chat = () => {
         }
     }
     console.log(isSuccess)
-    
+    console.log(chatList)
     useEffect(() =>  {
         if(number) postChatList();
     }, []);
@@ -55,19 +60,16 @@ const Chat = () => {
                 isSuccess ? (
                     chatList ?
                         (
-                            <>  
-                                {chatList.data.map((chat: any) => (
-                                    <p key={chat.id}>{chat.message}</p>
-                                ))}
+                            <Row className="chatpage">  
                                 <NewChats
                                 url={`chat/${number}`} 
                                 typeChat={'chat'}
                                 socketChat={socketChat}
-                                />
-                            </>  
+                                chatList={chatList}/>
+                            </Row>  
                         )
                         :
-                        <></>
+                        <div></div>
                     )
                 :
                 isError &&

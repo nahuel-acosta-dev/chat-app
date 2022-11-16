@@ -58,20 +58,24 @@ const FormChat = ({url, typeChat, socketChat, addChat}: any) => {
 
     return (
         <Row>
-            <Col></Col>
-                <Col>
-                    <div>
-                        <FormGroup className="mb-3" controlId="formBasicEmail">
-                            <FormControl type="text" placeholder="Enter message" value={msg} 
-                            onChange={handleMsgInput} 
-                            required/>
-                        </FormGroup>
-                        <Button variant="primary" type="submit" onClick={submitMessage}>
-                            Submit
+            <Col xs={1}></Col>
+            <Row>
+                <Col xs={10}>
+                    <FormGroup className="mb-3" controlId="formBasicEmail">
+                        <FormControl type="text" placeholder="Enter message" value={msg} 
+                        onChange={handleMsgInput} 
+                        required/>
+                    </FormGroup>
+                </Col>
+                <Col xs={2}>
+                    <div className="d-grid gap-2">
+                        <Button variant="success" type="submit" onClick={submitMessage}>
+                        <i className="bi bi-arrow-right"></i>
                         </Button>
                     </div>
                 </Col>
-            <Col></Col>
+            </Row>
+            <Col xs={1}></Col>
         </Row>
     )
 }
