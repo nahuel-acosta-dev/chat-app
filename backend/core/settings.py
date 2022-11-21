@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
 from urllib.parse import quote
 from datetime import timedelta
 import environ
@@ -47,15 +46,7 @@ FRONTEND = os.environ.get('FRONTEND')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG')
 
-if not DEBUG:
-    DEFAULT_FROM_EMAIL = 'nahuel acosta - <brianacostanahuel2000@gmail.com>'
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = env('EMAIL_HOST')
-    EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-    EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-    EMAIL_PORT = env('EMAIL_PORT')
-    EMAIL_USE_TLS = env('EMAIL_USE_TLS')
-
+DEBUG = True
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = True
@@ -102,6 +93,7 @@ THIRD_PARTY_APPS = [
     'djoser',
     'social_django',
     'rest_framework_simplejwt',
+    'rest_framework.authtoken',
     'rest_framework_simplejwt.token_blacklist',
     'ckeditor',
     'ckeditor_uploader',
@@ -192,8 +184,27 @@ SIMPLE_JWT = {
         'rest_framework_simplejwt.tokens.AccessToken',
     )
 }
+ADMINS = (
+    ('You', 'brianacostanahuelmails@gmail.com'),
+)
+MANAGERS = ADMINS
+
+SITE_NAME = ('Tinglets')
+
+DEFAULT_FROM_EMAIL = 'nahuel acosta - <brianacostanahuelmails@gmail.com>'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_USE_TLS = True
+
+PROTOCOL = "http"
+DOMAIN = "localhost:3000"
 
 DJOSER = {
+    'DOMAIN': 'localhost:3000',
+    'SITE_NAME': 'Tinglet',
     'LOGIN_FIELD': 'email',
     'USER_CREATE_PASSWORD_RETYPE': True,
     'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
@@ -203,20 +214,26 @@ DJOSER = {
     'SET_PASSWORD_RETYPE': True,
     'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
     'USERNAME_RESET_CONFIRM_URL': 'email/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL': 'activate/{uid}/{token}',
+    'ACTIVATION_URL': 'auth/activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
     'SOCIAL_AUTH_TOKEN_STRATEGY': 'djoser.social.token.jwt.TokenStrategy',
     'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['http://localhost:8000/google',
                                           'http://127.0.0.1:8000/google',
                                           'http://localhost:8000/login',
                                           'http://127.0.0.1:3000/google',
-                                          'http://localhost:3000/google/'],
+                                          'http://localhost:3000/google/'
+
+                                          ],
     'SERIALIZERS': {
         'user_create': 'accounts.serializers.UserCreateSerializer',
         'user': 'apps.user.serializers.UserCreateSerializer',
         'current_user': 'apps.user.serializers.UserCreateSerializer',
         'user_delete': 'djoser.serializers.UserDeleteSerializer',
-    }
+    },
+    'EMAIL': {
+        'activation': 'djoser.email.ActivationEmail',
+        'confirmation': 'djoser.email.ConfirmationEmail',
+    },
 }
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('GG_CLIENT_ID')
@@ -235,8 +252,6 @@ ASGI_APPLICATION = "core.asgi.application"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 AUTH_USER_MODEL = "user.UserAccount"
 DATABASES = MYSQL
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
