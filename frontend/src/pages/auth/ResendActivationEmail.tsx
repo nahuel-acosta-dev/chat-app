@@ -35,7 +35,7 @@ const ResendActivationEmail = () => {
             else {
                 setErrMsg("No server Response");
             }
-            if (errRef.current !== null) {
+            if (errRef.current !== null) { 
                 errRef.current.focus();
             }
             
