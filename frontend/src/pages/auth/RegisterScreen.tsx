@@ -6,6 +6,7 @@ import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Auth from "../../components/auth/Auth";
 import Layout from "../../hocs/Layout";
+import Loading from "../../components/loading/Loading";
 
 const RegisterScreen = () => {
     const userRef = useRef<HTMLInputElement>(null);
@@ -31,7 +32,7 @@ const RegisterScreen = () => {
 
     useEffect(() => {
         if(redirect){
-            setTimeout(() => navigate('/auth/login'), 5000)
+            setTimeout(() => navigate('/redirect/activation/email'), 3000)
         }
     }, [redirect])
 
@@ -55,7 +56,13 @@ const RegisterScreen = () => {
 
         try{
             //llama a la api register
-            const userData = await register({firstName, lastName, email, password}).unwrap();
+            const userData = await register({
+                'first_name': firstName, 
+                'last_name': lastName, 
+                'email': email, 
+                'password': password,
+                're_password': confirmPwd
+            }).unwrap();
             console.log(userData);
             setFirstName('');
             setLastName('');
@@ -81,90 +88,95 @@ const RegisterScreen = () => {
 
     return (
         <Layout>
-            <Auth>
-                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                <Form noValidate onSubmit={e => handleSubmit(e)}>
-                    <Row className="mb-3">
-                    <Form.Group as={Col} md="6" controlId="validationCustomUsername">
-                        <Form.Label>First Name</Form.Label>
-                        <InputGroup hasValidation>
-                            <Form.Control
-                            type="text"
-                            placeholder="first Name"
-                            aria-describedby="inputGroupPrepend"
-                            onChange={handleFirstNameInput}
-                            value={firstName}
-                            ref={userRef} 
-                            autoComplete="off"
-                            required
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                Por favor ingresa tu username
-                            </Form.Control.Feedback>
-                        </InputGroup>
-                        </Form.Group>
-                        <Form.Group as={Col} md="6" controlId="validationCustomUsername">
-                        <Form.Label>LastName</Form.Label>
-                        <InputGroup hasValidation>
-                            <Form.Control
-                            type="text"
-                            placeholder="last Name"
-                            aria-describedby="inputGroupPrepend"
-                            onChange={handleLastNameInput}
-                            value={lastName}
-                            ref={userRef} 
-                            autoComplete="off"
-                            required
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                Por favor ingresa tu LastName
-                            </Form.Control.Feedback>
-                        </InputGroup>
-                        </Form.Group>
-                        <Form.Group as={Col} md="6" controlId="validationCustomEmail">
-                        <Form.Label>Email</Form.Label>
-                            <InputGroup hasValidation>
-                                <Form.Control
-                                type="email"
-                                placeholder="email"
-                                aria-describedby="inputGroupPrepend"
-                                onChange={handleEmailInput}
-                                value={email}
-                                required
-                                />
-                                <Form.Control.Feedback type="invalid">
-                                Por favor ingresa tu email
-                                </Form.Control.Feedback>
-                            </InputGroup>
-                        </Form.Group>
-                    </Row>
-                    <Row className="mb-3">
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Contraseña</Form.Label>
-                            <Form.Control 
-                            type="password" 
-                            placeholder="Contraseña"
-                            onChange={handlePwdInput}
-                            value={password}
-                            required
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicConfirm">
-                            <Form.Label>Confirmar Contraseña</Form.Label>
-                            <Form.Control 
-                            type="password" 
-                            placeholder="Confirmar Contraseña" 
-                            onChange={handleConfirmPwdInput}
-                            value={confirmPwd}
-                            required
-                            />
-                        </Form.Group>
-                    </Row>
-                    <div className="d-grid gap-2">
-                        <Button variant="info" type="submit" size="sm">Registrarse</Button>
-                    </div>
-                </Form>
-            </Auth>
+            {
+                isLoading && errMsg === ''  ?
+                    <Loading/>
+                    :
+                    (<Auth>
+                        <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                        <Form noValidate onSubmit={e => handleSubmit(e)}>
+                            <Row className="mb-3">
+                            <Form.Group as={Col} md="6" controlId="validationCustomUsername">
+                                <Form.Label>First Name</Form.Label>
+                                <InputGroup hasValidation>
+                                    <Form.Control
+                                    type="text"
+                                    placeholder="first Name"
+                                    aria-describedby="inputGroupPrepend"
+                                    onChange={handleFirstNameInput}
+                                    value={firstName}
+                                    ref={userRef} 
+                                    autoComplete="off"
+                                    required
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        Por favor ingresa tu username
+                                    </Form.Control.Feedback>
+                                </InputGroup>
+                                </Form.Group>
+                                <Form.Group as={Col} md="6" controlId="validationCustomUsername">
+                                <Form.Label>LastName</Form.Label>
+                                <InputGroup hasValidation>
+                                    <Form.Control
+                                    type="text"
+                                    placeholder="last Name"
+                                    aria-describedby="inputGroupPrepend"
+                                    onChange={handleLastNameInput}
+                                    value={lastName}
+                                    ref={userRef} 
+                                    autoComplete="off"
+                                    required
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        Por favor ingresa tu LastName
+                                    </Form.Control.Feedback>
+                                </InputGroup>
+                                </Form.Group>
+                                <Form.Group as={Col} md="6" controlId="validationCustomEmail">
+                                <Form.Label>Email</Form.Label>
+                                    <InputGroup hasValidation>
+                                        <Form.Control
+                                        type="email"
+                                        placeholder="email"
+                                        aria-describedby="inputGroupPrepend"
+                                        onChange={handleEmailInput}
+                                        value={email}
+                                        required
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                        Por favor ingresa tu email
+                                        </Form.Control.Feedback>
+                                    </InputGroup>
+                                </Form.Group>
+                            </Row>
+                            <Row className="mb-3">
+                                <Form.Group className="mb-3" controlId="formBasicPassword">
+                                    <Form.Label>Contraseña</Form.Label>
+                                    <Form.Control 
+                                    type="password" 
+                                    placeholder="Contraseña"
+                                    onChange={handlePwdInput}
+                                    value={password}
+                                    required
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicConfirm">
+                                    <Form.Label>Confirmar Contraseña</Form.Label>
+                                    <Form.Control 
+                                    type="password" 
+                                    placeholder="Confirmar Contraseña" 
+                                    onChange={handleConfirmPwdInput}
+                                    value={confirmPwd}
+                                    required
+                                    />
+                                </Form.Group>
+                            </Row>
+                            <div className="d-grid gap-2">
+                                <Button variant="info" type="submit" size="sm">Registrarse</Button>
+                            </div>
+                        </Form>
+                    </Auth>)
+            }
         </Layout>
     )
 }

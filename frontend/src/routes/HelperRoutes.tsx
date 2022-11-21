@@ -13,7 +13,7 @@ const HelperRouters = () =>{
 
     return (
       <Routes>
-      <Route path="*" element={<Error404/>}></Route>
+      <Route path="*" element={<Error404/>}/>
       <Route path="/" element={<PersistLogin />}>
       <Route path="/google" element={<GoogleRedirect />}/>
         <Route index element={<Home/>} />
