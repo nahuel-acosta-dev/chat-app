@@ -1,10 +1,10 @@
 import { Form } from "react-bootstrap";
 import Layout from "../../hocs/Layout";
-import {useResendEmailMutation} from '../../features/auth/resendEmailApiSlice';
+import {useResendEmailActivationMutation} from '../../features/auth/resendEmailActivationApiSlice';
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 
 const ResendActivationEmail = () => {
-    const [resendEmail, {isLoading}] = useResendEmailMutation();
+    const [resendEmail, {isLoading}] = useResendEmailActivationMutation();
     const [email, setEmail] = useState<string>('');
     const errRef = useRef<HTMLInputElement>(null);
     const userRef = useRef<HTMLInputElement>(null);

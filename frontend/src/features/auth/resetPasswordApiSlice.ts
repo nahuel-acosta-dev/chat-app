@@ -1,10 +1,10 @@
 import { apiSlice } from "../../app/api/apiSlice";
 
-export const authApiSlice: any = apiSlice.injectEndpoints({
+export const resetPasswordApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        login: builder.mutation({
+        resetPassword: builder.mutation({
             query: credentials => ({
-                url: 'auth/jwt/create/',
+                url: 'auth/users/reset_password/',
                 method: 'POST',
                 body: { ...credentials }
             })
@@ -13,5 +13,5 @@ export const authApiSlice: any = apiSlice.injectEndpoints({
 })
 
 export const {
-    useLoginMutation
-} = authApiSlice;
+    useResetPasswordMutation
+} = resetPasswordApiSlice;

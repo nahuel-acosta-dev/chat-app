@@ -1,8 +1,8 @@
 import { apiSlice } from "../../app/api/apiSlice";
 
-export const resendEmailApiSlice = apiSlice.injectEndpoints({
+export const resendEmailActivationApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        resendEmail: builder.mutation({
+        resendEmailActivation: builder.mutation({
             query: credentials => ({
                 url: 'auth/users/resend_activation/',
                 method: 'POST',
@@ -13,5 +13,5 @@ export const resendEmailApiSlice = apiSlice.injectEndpoints({
 })
 
 export const {
-    useResendEmailMutation
-} = resendEmailApiSlice;
+    useResendEmailActivationMutation
+} = resendEmailActivationApiSlice;

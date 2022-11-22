@@ -99,6 +99,8 @@ const LoginScreen = () => {
                         <Col>
                         <hr />
                             <Link to="/auth/register" className="text-decoration-none">Regístrese para crear una cuenta</Link>
+                        <hr />
+                            <Link to="/auth/reset-password" className="text-decoration-none">Olvidaste tu contraseña?</Link>
                         </Col>
                         <Col sm={1}></Col>
                     </Row>
