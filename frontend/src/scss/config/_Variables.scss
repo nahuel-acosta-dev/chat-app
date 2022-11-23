@@ -1,12 +1,13 @@
 ////////////////////////////////
 //1- Patron de Colores
 ////////////////////////////////
-$celestial: #0dcaf0;
-$blue: #0a58ca;
+$primary: #6770DD;
 $violet: #b642f5;
-$green: #5eedce;
-$darkgreen: #015249;
-$grey: #e9e9f0;
+$green: #31B0C4;
+$blue: #10142C;
+$dark: #040718;
+$vanilla: #D3B9AA;
+$orange: #fcab79;
 
 ////////////////////////////////
 //2- Modificando Variables Bootstrap
@@ -20,22 +21,26 @@ $btn-border-radius: 3rem;
 ////////////////////////////////
 //2- Fonts
 ////////////////////////////////
-$font-medium: 'Titillium Web', sans-serif;
-$font-fredoka: 'Fredoka One', cursive;
-$font-shadows: 'Londrina Shadow', cursive;
+$font-title:  'Inter', sans-serif;
+$font-medium: 'Roboto Mono', monospace;
 
 ////////////////////////////////
 //3- mixins generals
 ////////////////////////////////
-@mixin margin-auto {
-    margin-left: auto;
-    margin-right: auto;
+/// 
+
+// ////////////////////////////////
+//3- class generals
+////////////////////////////////
+.text-green{
+    color: $green;
 }
 
-@mixin title {
-    font-weight: 500;
-    color: $celestial;
-    text-decoration: none;
-    font-family: $font-shadows;
+.text-vanilla{
+    color: $vanilla;
+}
+
+.text-orange{
+    color: $orange;
 }
 

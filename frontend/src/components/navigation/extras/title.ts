@@ -1,0 +1,18 @@
+export const title = [
+    {letter: 'T',
+    className: 'text-primary'},
+    {letter: 'i',
+    className: 'text-green'},
+    {letter: 'n',
+    className: 'text-vanilla'},
+    {letter: 'g',
+    className: ''},
+    {letter: 'l',
+    className: 'text-primary'},
+    {letter: 'e',
+    className: 'text-green'},
+    {letter: 't',
+    className: 'text-vanilla'},
+    {letter: 's',
+    className: ''},
+];

@@ -1,4 +1,5 @@
 import {useDispatch, useSelector} from 'react-redux';
+import {title} from './extras/title';
 import {clearProfile} from '../../features/profile/profileSlice';
 import { selectCurrentProfile } from '../../features/profile/profileSlice';
 import { Link, useNavigate } from 'react-router-dom';
@@ -23,7 +24,14 @@ const NavBarLogged = () => {
         <>
             <Navbar bg="dark" variant="dark">
                 <Container>
-                    <Link to="/app/home" className="navbar-brand">Tinglet</Link>
+                    <Link to="/app/home" className="navbar-brand">
+                        {title.map((details, i) => (
+                            <span className={details.className}
+                            key={i}>
+                                {details.letter}
+                            </span>
+                        ))}
+                    </Link>
                     <Nav className="me-auto"
                     style={{ maxHeight: '50px' }}>
                             <NavDropdown

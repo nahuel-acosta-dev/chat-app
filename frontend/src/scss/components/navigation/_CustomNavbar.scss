@@ -1,0 +1,18 @@
+.navbar{
+    .navbar__cont{
+        border-bottom: 1px solid transparent;
+        border-image: linear-gradient(90deg, #7C7CEA 0.05%, #19C4A5 49.27%, #FCAB79 100.05%);
+        border-image-slice: 100%;
+        border-image-slice: 1;
+        .navbar__login{
+            background: linear-gradient(90deg, #7C7CEA 0.05%, #19C4A5 49.27%, #FCAB79 100.05%);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-bottom: 1px solid transparent;
+            border-image: linear-gradient(90deg, #7C7CEA 0.05%, #19C4A5 49.27%, #FCAB79 100.05%);
+            border-image-slice: 100%;
+            border-image-slice: 1;
+            letter-spacing: 0.05em;
+        }
+}
+}

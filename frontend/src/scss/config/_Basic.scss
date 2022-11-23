@@ -1,9 +1,14 @@
-.header{
-    height: 15vh;
+body{
+    font-family: $font-medium;
+    background-color: $blue;
 }
 
-.main{
-    height: 84vh;
+header{
+    height: 10vh;
+}
+
+main{
+    min-height: 90vh;
     max-width: 99vw;
     width: 96vw;
 }
