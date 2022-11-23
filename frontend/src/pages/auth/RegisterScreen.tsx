@@ -96,30 +96,32 @@ const RegisterScreen = () => {
                         <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                         <Form noValidate onSubmit={e => handleSubmit(e)}>
                             <Row className="mb-3">
-                            <Form.Group as={Col} md="6" controlId="validationCustomUsername">
-                                <Form.Label>First Name</Form.Label>
-                                <InputGroup hasValidation>
-                                    <Form.Control
-                                    type="text"
-                                    placeholder="first Name"
-                                    aria-describedby="inputGroupPrepend"
-                                    onChange={handleFirstNameInput}
-                                    value={firstName}
-                                    ref={userRef} 
-                                    autoComplete="off"
-                                    required
-                                    />
-                                    <Form.Control.Feedback type="invalid">
-                                        Por favor ingresa tu username
-                                    </Form.Control.Feedback>
-                                </InputGroup>
+                            <Form.Group as={Col} md="6" controlId="validationCustomUsername"
+                            className="mt-1"
+                            >
+                                <Form.Label>Ingresa Tu Nombre</Form.Label>
+                                    <InputGroup hasValidation>
+                                        <Form.Control
+                                        type="text"
+                                        placeholder="Nombre"
+                                        aria-describedby="inputGroupPrepend"
+                                        onChange={handleFirstNameInput}
+                                        value={firstName}
+                                        ref={userRef} 
+                                        autoComplete="off"
+                                        required
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            Por favor ingresa tu nombre
+                                        </Form.Control.Feedback>
+                                    </InputGroup>
                                 </Form.Group>
-                                <Form.Group as={Col} md="6" controlId="validationCustomUsername">
-                                <Form.Label>LastName</Form.Label>
+                                <Form.Group as={Col} md="6" controlId="validationCustomUsername" className="mt-1">
+                                <Form.Label>Ingresa Tu Apellido</Form.Label>
                                 <InputGroup hasValidation>
                                     <Form.Control
                                     type="text"
-                                    placeholder="last Name"
+                                    placeholder="Apellido"
                                     aria-describedby="inputGroupPrepend"
                                     onChange={handleLastNameInput}
                                     value={lastName}
@@ -128,12 +130,12 @@ const RegisterScreen = () => {
                                     required
                                     />
                                     <Form.Control.Feedback type="invalid">
-                                        Por favor ingresa tu LastName
+                                        Por favor ingresa tu Apellido
                                     </Form.Control.Feedback>
                                 </InputGroup>
                                 </Form.Group>
-                                <Form.Group as={Col} md="6" controlId="validationCustomEmail">
-                                <Form.Label>Email</Form.Label>
+                                <Form.Group as={Col} md="12" controlId="validationCustomEmail" className="mt-1">
+                                <Form.Label>Ingresa tu Email</Form.Label>
                                     <InputGroup hasValidation>
                                         <Form.Control
                                         type="email"
@@ -150,8 +152,8 @@ const RegisterScreen = () => {
                                 </Form.Group>
                             </Row>
                             <Row className="mb-3">
-                                <Form.Group className="mb-3" controlId="formBasicPassword">
-                                    <Form.Label>Contraseña</Form.Label>
+                                <Form.Group className="mb-3 mt-1" controlId="formBasicPassword">
+                                    <Form.Label>Ingresa tu Contraseña</Form.Label>
                                     <Form.Control 
                                     type="password" 
                                     placeholder="Contraseña"
@@ -160,7 +162,7 @@ const RegisterScreen = () => {
                                     required
                                     />
                                 </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicConfirm">
+                                <Form.Group className="mb-3 mt-1" controlId="formBasicConfirm">
                                     <Form.Label>Confirmar Contraseña</Form.Label>
                                     <Form.Control 
                                     type="password" 

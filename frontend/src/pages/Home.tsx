@@ -1,6 +1,6 @@
 import { Button, Col, Row } from "react-bootstrap";
 import pixel from '../img/pixel.png';
-import {title} from '../components/navigation/extras/title';
+import {title} from '../constants/title';
 import Title from '../components/title/Title';
 import Layout from "../hocs/Layout";
 import { Link } from "react-router-dom";
@@ -9,8 +9,8 @@ const Home = () => {
 
     return (
         <Layout>
-            <Row>
-                <Col xs={12} md={8}>
+            <Row className="text-center">
+                <Col xs={12} md={8} className="pe-0">
                     <div>
                         <p className="text-vanilla fs-1 fw-bolder meet">Meet your</p>
                         <p className="text-primary fs-1 fw-bolder">

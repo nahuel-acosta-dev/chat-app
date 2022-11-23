@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from 'react-redux';
-import {title} from './extras/title';
+import {title} from '../../constants/title';
 import {clearProfile} from '../../features/profile/profileSlice';
 import { selectCurrentProfile } from '../../features/profile/profileSlice';
 import { Link, useNavigate } from 'react-router-dom';

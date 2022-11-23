@@ -89,7 +89,7 @@ const LoginScreen = () => {
                             onChange={handlePwdInput} value={password} required/>
                         </Form.Group>
                         <div className="d-grid gap-2">
-                            <Button variant="info" type="submit" size="sm">
+                            <Button variant="info" type="submit" size="sm" className="mt-2">
                                 Iniciar sesión
                             </Button>
                         </div>
@@ -98,9 +98,13 @@ const LoginScreen = () => {
                         <Col sm={1}></Col>
                         <Col>
                         <hr />
-                            <Link to="/auth/register" className="text-decoration-none">Regístrese para crear una cuenta</Link>
+                            <Link to="/auth/register" className="text-decoration-none text-white">
+                                Regístrese para crear una cuenta
+                            </Link>
                         <hr />
-                            <Link to="/auth/reset-password" className="text-decoration-none">Olvidaste tu contraseña?</Link>
+                            <Link to="/auth/reset-password" className="text-decoration-none text-white">
+                                Olvidaste tu contraseña?
+                            </Link>
                         </Col>
                         <Col sm={1}></Col>
                     </Row>

@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Logo from '../../image/logo.svg';
+import { title } from '../../constants/title';
 
 type Props = { children: ReactNode }
 
@@ -10,17 +10,16 @@ const Auth: FC<Props> = ({children}) => {
 
 
     return(
-        <Container className="auth">
+        <Container className="auth text-white">
             <Row>
-            <Col xs={1} lg={3} sm={2}></Col>
-                <Col className="d-flex justify-content-end">
-                    <img
-                        alt="logo tinglet"
-                        height="80"
-                    />
-                </Col>
-                <Col className="d-flex justify-content-start align-content-center">
-                    <h2>Tinglet</h2>
+                <Col xs={1} lg={4} sm={2}></Col>
+                <Col className="text-center">
+                    {title.map((details, i) => (
+                        <span className={`${details.className} fs-1 fw-bolder`}
+                        key={i}>
+                            {details.letter}
+                        </span>
+                    ))}
                 </Col>
                 <Col xs={1} lg={4} sm={2}></Col>
             </Row>

@@ -1,5 +1,5 @@
 import {Container, Nav, Navbar} from "react-bootstrap";
-import {title} from './extras/title';
+import { title } from '../../constants/title';
 import { Link} from 'react-router-dom';
 const NavBar = () => {
 
