@@ -5,7 +5,7 @@ import ActivateScreen from '../pages/auth/ActivateScreen';
 import ResendActivationEmail from '../pages/auth/ResendActivationEmail';
 import ResetPasswordConfirmScreen from '../pages/auth/ResetPasswordConfirmScreen';
 import ResetPasswordScreen from '../pages/auth/ResetPasswordScreen';
-import GoogleButtonLogin from '../pages/auth/GoogleButtonLogin';
+import GoogleButtonLogin from '../components/auth/GoogleButtonLogin';
 
 const AuthRouter = () => {
     return(

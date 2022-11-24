@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { selectCurrentToken } from '../../features/auth/authSlice';
 import axios from 'axios';
 import queryString from 'query-string';
+import GoogleButton from 'react-google-button'
 
 axios.defaults.withCredentials = true;
 
@@ -38,9 +39,9 @@ const GoogleButtonLogin = () => {
   return(
     <div>
       <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-      <button className='btn btn-danger mt-3' onClick={continueWithGoogle}>
+      <GoogleButton className='mx-auto mt-3' onClick={continueWithGoogle}>
           Continue With Google
-      </button>
+      </GoogleButton>
     </div>
   )
 }

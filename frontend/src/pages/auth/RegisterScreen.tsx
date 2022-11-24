@@ -172,7 +172,7 @@ const RegisterScreen = () => {
                                 </Form.Group>
                             </Row>
                             <div className="d-grid gap-2">
-                                <Button variant="info" type="submit" size="sm">Registrarse</Button>
+                                <Button variant="info" type="submit" size="lg" className="rounded-1">Registrarse</Button>
                             </div>
                         </Form>
                     </Auth>)

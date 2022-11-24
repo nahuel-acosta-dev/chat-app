@@ -4,6 +4,7 @@ import { setCredentials } from '../../features/auth/authSlice';
 import {useLoginMutation} from '../../features/auth/authApiSlice';
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import GoogleButtonLogin from '../../components/auth/GoogleButtonLogin'
 import Loading from '../../components/loading/Loading';
 import Auth from "../../components/auth/Auth";
 import Layout from "../../hocs/Layout";
@@ -89,7 +90,7 @@ const LoginScreen = () => {
                             onChange={handlePwdInput} value={password} required/>
                         </Form.Group>
                         <div className="d-grid gap-2">
-                            <Button variant="info" type="submit" size="sm" className="mt-2">
+                            <Button variant="info" type="submit" size="lg" className="mt-2 rounded-1">
                                 Iniciar sesión
                             </Button>
                         </div>
@@ -97,6 +98,7 @@ const LoginScreen = () => {
                     <Row>
                         <Col sm={1}></Col>
                         <Col>
+                        <GoogleButtonLogin />
                         <hr />
                             <Link to="/auth/register" className="text-decoration-none text-white">
                                 Regístrese para crear una cuenta
