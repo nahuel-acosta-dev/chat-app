@@ -1,6 +1,4 @@
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
-import {useDispatch} from "react-redux";
-import { setCredentials } from '../../features/auth/authSlice';
 import {useRegisterMutation} from '../../features/auth/registerApiSlice';
 import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -99,7 +97,7 @@ const RegisterScreen = () => {
                             <Form.Group as={Col} md="6" controlId="validationCustomUsername"
                             className="mt-1"
                             >
-                                <Form.Label>Ingresa Tu Nombre</Form.Label>
+                                <Form.Label>Ingresa tu Nombre</Form.Label>
                                     <InputGroup hasValidation>
                                         <Form.Control
                                         type="text"
@@ -117,7 +115,7 @@ const RegisterScreen = () => {
                                     </InputGroup>
                                 </Form.Group>
                                 <Form.Group as={Col} md="6" controlId="validationCustomUsername" className="mt-1">
-                                <Form.Label>Ingresa Tu Apellido</Form.Label>
+                                <Form.Label>Ingresa tu Apellido</Form.Label>
                                 <InputGroup hasValidation>
                                     <Form.Control
                                     type="text"

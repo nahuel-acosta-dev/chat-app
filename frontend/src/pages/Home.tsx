@@ -37,7 +37,7 @@ const Home = () => {
                         </p>
                     </div>
                     <div>
-                        <Link className="mt-4 btn btn-primary btn-lg border border-1 rounded  btn-lg" 
+                        <Link className="mt-4 btn btn-primary btn-lg border border-1 rounded" 
                         to="/auth/register">
                             Registrate es gratis
                         </Link>
