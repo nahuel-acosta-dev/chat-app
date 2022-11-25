@@ -26,9 +26,9 @@ const Chat = () => {
     
 
     return(
-        <Accordion.Item eventKey="0">
-            <Accordion.Header>Chats</Accordion.Header>
-            <Accordion.Body>
+        <Accordion.Item eventKey="0" className="bg-transparent">
+            <Accordion.Header className="bg-transparent">Chats</Accordion.Header>
+            <Accordion.Body className="bg-transparent">
             {
                 isLoading ? 
                     <Loading/> 
@@ -38,7 +38,7 @@ const Chat = () => {
                         (
                         <Link to={`/app/chat/${group['chat_name']}`} 
                         className="text-decoration-none text-black" key={group['id']}>
-                            <Row className="alert alert-success chats">
+                            <Row className="alert alert-primary chats">
                                 <Col xs={2} className="cont__profile">
                                     <figure className="figure">
                                         <img src={ProfileImg} height="50"
@@ -59,7 +59,7 @@ const Chat = () => {
                     )
                 :
                 isError &&
-                    <div>
+                    <div className="text-white fs-1">
                         Ocurrio un error al cargar Los Mensajes
                     </div>
             } 

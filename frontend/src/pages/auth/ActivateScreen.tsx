@@ -18,9 +18,16 @@ const ActivateScreen = () => {
         const result = await activate({uid, token});
         console.log(result)
         setVerified(true);
-        }catch(e: any){
-            console.log(e);
-            console.log('estas en el catch');
+        }catch(err: any){
+            if (err.status === 400){
+                setErrMsg("datos inexistentes");
+            }
+            else if (err.status === 401){
+                setErrMsg("No se ha encontrado el usuario");
+            }
+            else {
+                setErrMsg("No server Response");
+            }
         }
     };
 

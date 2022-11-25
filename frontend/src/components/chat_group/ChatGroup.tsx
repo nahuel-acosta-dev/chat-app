@@ -18,9 +18,9 @@ const ChatGroup = () => {
     } = useGetListChatGroupQuery(null);
 
     return (
-        <Accordion.Item eventKey="1">
-            <Accordion.Header>Groups</Accordion.Header>
-            <Accordion.Body>
+        <Accordion.Item eventKey="1" className="bg-transparent">
+            <Accordion.Header className="bg-transparent">Groups</Accordion.Header>
+            <Accordion.Body className="bg-transparent">
                 {
                     isLoading ? 
                         <Loading/> 
@@ -30,7 +30,7 @@ const ChatGroup = () => {
                             (
                             <Link to={`/app/chat_group/chat_group_${group['chat_group']['id']}`}
                                 key={group['chat_group']['id']} className="text-decoration-none text-black">
-                                <Row className="alert alert-success chats">
+                                <Row className="alert alert-primary chats">
                                     <Col xs={2} className="cont__profile">
                                         <figure className="figure">
                                             <img src={ProfileImg} height="50"

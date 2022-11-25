@@ -18,7 +18,7 @@ const AppHome = () => {
             {
             profile.id !== null ?
                 <div>
-                    <Accordion defaultActiveKey="0" flush>
+                    <Accordion defaultActiveKey="0" flush className="p-3 mb-2 bg-transparent text-dark">
                         <ChatGroup />
                         <Chat/>
                     </Accordion>

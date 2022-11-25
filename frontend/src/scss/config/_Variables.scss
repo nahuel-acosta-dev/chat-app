@@ -18,11 +18,23 @@ $btn-border-radius-sm: .6rem;
 $btn-border-radius-lg: 1rem;
 $btn-border-radius: 3rem;
 
+
+//$accordion-icon-color: white!important;
+//$accordion-icon-active-color: transparent;
+//$accordion-color: white!important;
+$accordion-button-bg:transparent;
+$accordion-button-active-bg:transparent;
+$accordion-button-color: white;
+$accordion-button-active-color:white;
+//$accordion-icon-color: white;
+//$accordion-icon-active-color: white;
+//$accordion-button-focus-border-color:transparent;
 ////////////////////////////////
 //2- Fonts
 ////////////////////////////////
 $font-title:  'Inter', sans-serif;
 $font-medium: 'Roboto Mono', monospace;
+
 
 ////////////////////////////////
 //3- mixins generals
