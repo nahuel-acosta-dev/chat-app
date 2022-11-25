@@ -1,17 +1,27 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {useActivateMutation} from '../../features/auth/activateApiSlice';
 import { useNavigate, Navigate, useParams } from "react-router-dom";
 import Layout from "../../hocs/Layout";
+import { Button } from "react-bootstrap";
+import Auth from "../../components/auth/Auth";
 
 const ActivateScreen = () => {
+    const errRef = useRef<HTMLInputElement>(null);
+    const [errMsg, setErrMsg] = useState<string>('');
     const [verified, setVerified] = useState(false);
     const [activate, { isLoading }] = useActivateMutation();
     const {uid, token} = useParams();
     const navigate = useNavigate();
 
-    const verify_account = () => {
-        activate({uid, token});
+    const verify_account = async () => {
+        try{
+        const result = await activate({uid, token});
+        console.log(result)
         setVerified(true);
+        }catch(e: any){
+            console.log(e);
+            console.log('estas en el catch');
+        }
     };
 
     if (verified) {
@@ -22,22 +32,25 @@ const ActivateScreen = () => {
         <Layout>
             {
             isLoading ?
-                <>Verificando cuenta...</>
+                <div className="fs-1 fw-bold text-white  mt-2">Verificando cuenta...</div>
                 :
-                <div 
-                    className='d-flex flex-column justify-content-center align-items-center'
-                    style={{ marginTop: '200px' }}
-                >
-                    <h1>Verify your Account:</h1>
-                    <button
-                        onClick={verify_account}
-                        style={{ marginTop: '50px' }}
-                        type='button'
-                        className='btn btn-primary'
-                    >
-                        Verify
-                    </button>
-                </div>
+                <Auth>
+                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                    <div 
+                        className='d-flex flex-column justify-content-center 
+                        align-items-center text-whwite mt-1'>
+                        <p className="fs-1 fw-bold">Verificar cuenta</p>
+                        <Button
+                            onClick={verify_account}
+                            type='button'
+                            variant="info"
+                            className='btn rounded-1'
+                            size="lg"
+                            >
+                            Verificar
+                        </Button>
+                    </div>
+                </Auth>
             }
         </Layout>
     );

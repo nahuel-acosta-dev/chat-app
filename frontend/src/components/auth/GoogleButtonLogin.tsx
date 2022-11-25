@@ -17,9 +17,6 @@ const GoogleButtonLogin = () => {
   useEffect(() => {
     const values = queryString.parse(location.search);
     const error = values.error ? values.error : null;
-
-    console.log('error: ' + error);
-
     if (error) {
       setErrMsg("Error signing in to Google");
     }
@@ -28,6 +25,8 @@ const GoogleButtonLogin = () => {
   const continueWithGoogle = async () => {
     try {
         const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?redirect_uri=http://localhost:3000/google/`);
+        console.log(res)
+        console.log(res.data.authorization_url)
         window.location.replace(res.data.authorization_url);
         console.log('error en el try');
     } catch (err) {

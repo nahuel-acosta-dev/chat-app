@@ -47,7 +47,7 @@ const ResendActivationEmailScreen = () => {
         <Layout>
             {
             isLoading ?
-                <div className="text-white">Reenviando Mail...</div>
+                <div className="text-white fs-1">Reenviando Mail...</div>
                 :
                 <Auth>
                     <div className='text-white'>
