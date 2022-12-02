@@ -16,12 +16,7 @@ const NavBarLogged = () => {
         navigate('/');  
     }
     console.log(profile);
-
-    const redirect = () => navigate('/app/profile');
-
-
     return (
-        <>
             <Navbar bg="dark" variant="dark">
                 <Container>
                     <Link to="/app/home" className="navbar-brand">
@@ -32,42 +27,32 @@ const NavBarLogged = () => {
                             </span>
                         ))}
                     </Link>
-                    <Nav className="me-auto"
-                    style={{ maxHeight: '50px' }}>
-                            <NavDropdown
+                    <Nav className="navbar-center">
+                        <div className="navbar-text profile">
+                        <NavDropdown
                                 id="nav-dropdown-dark-example"
-                                title={<i className="bi bi-sort-down nav-icon"></i>}
+                                title={<>Signed in as: {profile.user.last_name}</>}
                                 menuVariant="dark"
                                 className="nav-dropdown"
                                 >
-                                <NavDropdown.Item>
-                                    <Button variant="link" className="navbar-links
-                                    text-decoration-none text-white" onClick={redirect}>
+                                <NavDropdown.Item eventKey="4.1">
+                                    <Link className="btn btn-link navbar-links
+                                    text-decoration-none text-white" to="/app/profile">
                                         <i className="bi bi-person"></i> Profile
-                                    </Button>
+                                    </Link>
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item className="text-decoration-none text-white">
+                                <NavDropdown.Item eventKey="4.2" className="nav-item dropdown text-decoration-none text-white">
                                     <Button variant="link" onClick={logout} className="navbar-links 
                                     text-decoration-none text-white">
                                         <i className="bi bi-power"></i> Logout
                                     </Button>
                                 </NavDropdown.Item>
                             </NavDropdown>
-                    </Nav>
-                    <Nav className="navbar-center">
-                        <Navbar.Text  className="profile">
-                            Signed in as: {
-                                profile.user != null ? 
-                                    profile.user.last_name
-                                    :
-                                    <h2>iniciado</h2>
-                                }
-                        </Navbar.Text>
+                        </div>
                     </Nav>
                 </Container>
             </Navbar>
-        </>
     )
 
 }

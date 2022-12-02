@@ -1,4 +1,5 @@
 import {Routes, Route} from 'react-router-dom';
+import Error404 from '../pages/error/Error404';
 import LoginScreen from '../pages/auth/LoginScreen';
 import RegisterScreen from '../pages/auth/RegisterScreen';
 import ActivateScreen from '../pages/auth/ActivateScreen';
@@ -10,6 +11,7 @@ import GoogleButtonLogin from '../components/auth/GoogleButtonLogin';
 const AuthRouter = () => {
     return(
             <Routes>
+                <Route path='*' element={<Error404/>} />
                 <Route path='login' element={<LoginScreen/>} />
                 <Route path='register' element={<RegisterScreen/>} />
                 <Route path='activate/:uid/:token' element={<ActivateScreen/>} />

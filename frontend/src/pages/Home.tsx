@@ -4,8 +4,11 @@ import {title} from '../constants/title';
 import Title from '../components/title/Title';
 import Layout from "../hocs/Layout";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCurrentToken } from "../features/auth/authSlice";
 
 const Home = () => {
+    const token = useSelector(selectCurrentToken);
 
     return (
         <Layout>
@@ -37,10 +40,18 @@ const Home = () => {
                         </p>
                     </div>
                     <div>
+                        {
+                        !token ?    
                         <Link className="mt-4 btn btn-primary btn-lg border border-1 rounded" 
                         to="/auth/register">
                             Registrate es gratis
                         </Link>
+                        :  
+                        <Link className="mt-4 btn btn-primary btn-lg border border-1 rounded" 
+                        to="/app/home">
+                            Empezar
+                        </Link>  
+                    }
                     </div>
                 </Col>
                 <Col xs={12} md={4} className="mt-5">
