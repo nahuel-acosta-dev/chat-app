@@ -23,6 +23,11 @@ class UserProfileView(viewsets.GenericViewSet):
     update_serializer_class = UpdateUserProfileSerializer
     queryset = None
 
+    def get_serializer_class(self):
+        if self.action in ["partial_update"]:
+            return self.update_serializer_class
+        return self.serializer_class
+
     def get_user_profile(self, request):
         user_id = get_user_data(request)
         try:
@@ -75,10 +80,10 @@ class UserProfileView(viewsets.GenericViewSet):
 
         profile = self.get_object(pk)
         profile.photo = data['photo']
-        profile.save()
         profile_serializer = self.update_serializer_class(
             profile, data=request.data)
         if profile_serializer.is_valid():
+            profile_serializer.save()
             return Response({
                 'message': 'Updated user correctly',
                 'data': profile_serializer.data
