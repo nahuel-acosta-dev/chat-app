@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { Navigate, useParams } from "react-router-dom";
+import Auth from "../../components/auth/Auth";
 import {useResetPasswordConfirmMutation} from '../../features/auth/resetPasswordConfirmApiSlice';
 import Layout from "../../hocs/Layout";
 
@@ -17,7 +18,7 @@ const ResetPasswordConfirmScreen = () => {
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => setFormData(
         { ...formData, [e.target.name]: e.target.value }
-        );
+    );
 
     const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -39,33 +40,37 @@ const ResetPasswordConfirmScreen = () => {
            {isLoading ?
            <>Enviando email de confirmacion...</> 
            :
-           (<Form onSubmit={e => onSubmit(e)}>
-                <div className='form-group'>
-                        <input
-                            className='form-control'
-                            type='password'
-                            placeholder='New Password'
-                            name='new_password'
-                            value={new_password}
-                            onChange={e => onChange(e)}
-                            minLength={6}
-                            required
-                        />
-                    </div>
-                    <div className='form-group'>
-                        <input
-                            className='form-control'
-                            type='password'
-                            placeholder='Confirm New Password'
-                            name='re_new_password'
-                            value={re_new_password}
-                            onChange={e => onChange(e)}
-                            minLength={6}
-                            required
-                        />
-                    </div>
-                    <button className='btn btn-primary' type='submit'>Reset Password</button>
-            </Form>)}
+           (
+           <Auth>
+            <Form onSubmit={e => onSubmit(e)}>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Control
+                                className='form-control'
+                                type='password'
+                                placeholder='New Password'
+                                name='new_password'
+                                value={new_password}
+                                onChange={onChange}
+                                minLength={6}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Control
+                                className='form-control'
+                                type='password'
+                                placeholder='Confirm New Password'
+                                name='re_new_password'
+                                value={re_new_password}
+                                onChange={onChange}
+                                minLength={6}
+                                required
+                            />
+                        </Form.Group>
+                        <Button variant="primary" type='submit'>Reset Password</Button>
+                </Form>
+            </Auth>
+            )}
         </Layout>
     )
 }
