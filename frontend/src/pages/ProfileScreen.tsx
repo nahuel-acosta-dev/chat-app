@@ -1,12 +1,17 @@
 import { ChangeEvent, FormEvent, ImgHTMLAttributes, useEffect, useRef, useState } from "react";
 import { Col, Form, Row, FormControl, Button, Alert } from "react-bootstrap";
 import {useUpdateProfileMeMutation} from '../features/profile/updateProfileMeSlice';
+import FormEmail from "../components/form/FormEmail";
+import FormPassword from "../components/form/FormPassword";
+import FormFirstName from "../components/form/FormFirstName";
 import Resizer from 'react-image-file-resizer'
 import ImageResize from "../components/profile/ImageResize";
 import Layout from "../hocs/Layout";
 import ProfileImg from "../img/profile.png";
 import { useSelector } from "react-redux";
 import { selectCurrentProfile } from "../features/profile/profileSlice";
+import FormLastName from "../components/form/FormLastName";
+import Loading from "../components/loading/Loading";
 
 interface InsertImg {
     backgroundImage?: string
@@ -95,60 +100,71 @@ const ProfileScreen = () => {
 
     return(
         <Layout>
-            <Row>
-                <Col xs={1}></Col>
-                <Col xs={10}>
+            { 
+                profile.id === null ?
+                <Loading/>
+                :
+                <div className="mb-5"> 
                     <Row>
-                        <Col className="cont__profile mt-4" xs={12} md={7}>
-                            <figure className="figure profile__figure">
-                                <div className="figure-img img-fluid rounded-circle border border-white" 
-                                    style={
-                                        insertImg !== null ? 
-                                            insertImg 
-                                        : 
-                                        profile.photo !== null ? 
-                                            {
-                                                backgroundImage: `url(${process.env.REACT_APP_API_URL}${profile.photo})`
+                        <Col xs={1}></Col>
+                        <Col xs={10}>
+                            <Row>
+                                <Col className="cont__profile mt-4" xs={12} md={7}>
+                                    <figure className="figure profile__figure">
+                                        <div className="figure-img img-fluid rounded-circle border border-white" 
+                                            style={
+                                                insertImg !== null ? 
+                                                    insertImg 
+                                                : 
+                                                profile.photo !== null ? 
+                                                    {
+                                                        backgroundImage: `url(${process.env.REACT_APP_API_URL}${profile.photo})`
+                                                    }
+                                                    :
+                                                    {
+                                                        backgroundImage: `url(${ProfileImg})`
+                                                    }
                                             }
-                                            :
-                                            {
-                                                backgroundImage: `url(${ProfileImg})`
-                                            }
-                                    }
-                                    ></div>
-                            </figure>
+                                            ></div>
+                                    </figure>
+                                </Col>
+                                <Col className="mt-5" xs={12} md={5}>
+                                    <Form onSubmit={e => handleSubmit(e)}>
+                                        <Form.Group controlId="formFileSm" className="mb-3">
+                                            <Form.Label>Carga tu nueva foto de perfil</Form.Label>
+                                            <Form.Control type="file"
+                                                size="sm"
+                                                name="file"
+                                                multiple={false}
+                                                onChange={(e) => uploadImg(e)}
+                                                accept="image/png, image/jpeg, image/jpg" />
+                                        </Form.Group>
+                                        {img !== null &&
+                                            <Button variant="primary" type="submit">
+                                                Confirmar
+                                            </Button>}
+                                            <p ref={errRef} 
+                                                className={
+                                                    errMsg !== null && errMsg !== "" ? 
+                                                    "alert alert-danger" 
+                                                    : 
+                                                    "offscreen"
+                                                } 
+                                            role="alert" aria-live="assertive">
+                                                {errMsg}
+                                            </p>
+                                    </Form>
+                                </Col>
+                            </Row>
                         </Col>
-                        <Col className="mt-5" xs={12} md={5}>
-                            <Form onSubmit={e => handleSubmit(e)}>
-                                <Form.Group controlId="formFileSm" className="mb-3">
-                                    <Form.Label>Carga tu nueva foto de perfil</Form.Label>
-                                    <Form.Control type="file"
-                                        size="sm"
-                                        name="file"
-                                        multiple={false}
-                                        onChange={(e) => uploadImg(e)}
-                                        accept="image/png, image/jpeg, image/jpg" />
-                                </Form.Group>
-                                {img !== null &&
-                                    <Button variant="primary" type="submit">
-                                        Confirmar
-                                    </Button>}
-                                    <p ref={errRef} 
-                                        className={
-                                            errMsg !== null && errMsg !== "" ? 
-                                            "alert alert-danger" 
-                                            : 
-                                            "offscreen"
-                                        } 
-                                    role="alert" aria-live="assertive">
-                                        {errMsg}
-                                    </p>
-                            </Form>
-                        </Col>
+                        <Col xs={1}></Col>
                     </Row>
-                </Col>
-                <Col xs={1}></Col>
-            </Row>
+                    <hr/>
+                    <FormEmail />
+                    <hr/>
+                    <FormPassword />
+                </div>
+            }
         </Layout>
     )
 }

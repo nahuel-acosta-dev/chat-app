@@ -76,40 +76,40 @@ const LoginScreen = () => {
             :
             (<>
                 <Auth>
-                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <Form onSubmit={(e) => handleSubmit(e)}>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" placeholder="Ingresa tu Email"
-                            autoComplete="off" ref={userRef} value={email} onChange={handleEmailInput} 
-                            required/>
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Contraseña</Form.Label>
-                            <Form.Control type="password" placeholder="Ingresa tu contraseña" 
-                            onChange={handlePwdInput} value={password} required/>
-                        </Form.Group>
-                        <div className="d-grid gap-2">
-                            <Button variant="info" type="submit" size="lg" className="mt-2 rounded-1">
-                                Iniciar sesión
-                            </Button>
-                        </div>
-                    </Form>
-                    <Row>
-                        <Col sm={1}></Col>
-                        <Col>
-                        <GoogleButtonLogin />
-                        <hr />
-                            <Link to="/auth/register" className="text-decoration-none text-white">
-                                Regístrese para crear una cuenta
-                            </Link>
-                        <hr />
-                            <Link to="/auth/reset-password" className="text-decoration-none text-white">
-                                Olvidaste tu contraseña?
-                            </Link>
-                        </Col>
-                        <Col sm={1}></Col>
-                    </Row>
+                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                        <Form onSubmit={(e) => handleSubmit(e)}>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control type="email" placeholder="Ingresa tu Email"
+                                autoComplete="off" ref={userRef} value={email} onChange={handleEmailInput} 
+                                required/>
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>Contraseña</Form.Label>
+                                <Form.Control type="password" placeholder="Ingresa tu contraseña" 
+                                onChange={handlePwdInput} value={password} required/>
+                            </Form.Group>
+                            <div className="d-grid gap-2">
+                                <Button variant="info" type="submit" size="lg" className="mt-2 rounded-1">
+                                    Iniciar sesión
+                                </Button>
+                            </div>
+                        </Form>
+                        <Row>
+                            <Col sm={1}></Col>
+                            <Col>
+                            <GoogleButtonLogin />
+                            <hr />
+                                <Link to="/auth/register" className="text-decoration-none text-white">
+                                    Regístrese para crear una cuenta
+                                </Link>
+                            <hr />
+                                <Link to="/auth/reset-password" className="text-decoration-none text-white">
+                                    Olvidaste tu contraseña?
+                                </Link>
+                            </Col>
+                            <Col sm={1}></Col>
+                        </Row>
                     </Auth> 
                 </>
         )

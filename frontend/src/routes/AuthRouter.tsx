@@ -5,6 +5,7 @@ import RegisterScreen from '../pages/auth/RegisterScreen';
 import ActivateScreen from '../pages/auth/ActivateScreen';
 import ResendActivationEmailScreen from '../pages/auth/ResendActivationEmailScreen';
 import ResetPasswordConfirmScreen from '../pages/auth/ResetPasswordConfirmScreen';
+import ResetEmailConfirmScreen from '../pages/auth/ResetEmailConfirmScreen';
 import ResetPasswordScreen from '../pages/auth/ResetPasswordScreen';
 import GoogleButtonLogin from '../components/auth/GoogleButtonLogin';
 
@@ -16,6 +17,7 @@ const AuthRouter = () => {
                 <Route path='register' element={<RegisterScreen/>} />
                 <Route path='activate/:uid/:token' element={<ActivateScreen/>} />
                 <Route path='password/reset/confirm/:uid/:token' element={<ResetPasswordConfirmScreen />} />
+                <Route path='email/reset/confirm/:uid/:token' element={<ResetEmailConfirmScreen />} />
                 <Route path='redirect/activation/email' element={<ResendActivationEmailScreen />} />
                 <Route path='reset-password' element={<ResetPasswordScreen />} />
                 <Route path='google' element={<GoogleButtonLogin/>} />
