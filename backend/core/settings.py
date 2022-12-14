@@ -39,8 +39,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
-DOMAIN = os.environ.get('DOMAIN')
-
 FRONTEND = os.environ.get('FRONTEND')
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -203,10 +201,10 @@ EMAIL_PORT = env('EMAIL_PORT')
 EMAIL_USE_TLS = True
 
 PROTOCOL = "http"
-DOMAIN = "localhost:3000"
+DOMAIN = os.environ.get('FRONTEND')
 
 DJOSER = {
-    'DOMAIN': 'localhost:3000',
+    'DOMAIN': os.environ.get('FRONTEND'),
     'SITE_NAME': 'Tinglet',
     'LOGIN_FIELD': 'email',
     'USER_CREATE_PASSWORD_RETYPE': True,
