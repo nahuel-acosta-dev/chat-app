@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from urllib.parse import quote
 from datetime import timedelta
 import environ
-from .db import MYSQL
 import os
 from pathlib import Path
 import django
