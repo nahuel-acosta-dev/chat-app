@@ -308,10 +308,9 @@ CHANNEL_LAYERS = {
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 CKEDITOR_UPLOAD_PATH = "/media/"
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-
     os.path.join(BASE_DIR, "static")
 ]
 
