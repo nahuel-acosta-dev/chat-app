@@ -14,10 +14,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ChatGroup',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('chat_group_name', models.TextField(max_length=100)),
-                ('photo', models.ImageField(blank=True, null=True, upload_to='photos/%Y/%m/')),
-                ('description', models.TextField(blank=True, help_text='description of the group')),
+                ('photo', models.ImageField(blank=True,
+                 null=True, upload_to='photos/%Y/%m/')),
+                ('description', models.TextField(
+                    blank=True, help_text='description of the group')),
             ],
         ),
     ]
