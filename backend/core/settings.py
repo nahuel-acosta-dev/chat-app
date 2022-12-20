@@ -250,7 +250,7 @@ ASGI_APPLICATION = "core.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-AUTH_USER_MODEL = "apps.user.UserAccount"
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -321,5 +321,5 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+AUTH_USER_MODEL = "user.UserAccount"
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
