@@ -88,6 +88,7 @@ CHAT_APPS = ['apps.chat',
              'apps.user_in_chat_group',
              'apps.message_in_chat_group']
 THIRD_PARTY_APPS = [
+    'channels'
     'corsheaders',
     'rest_framework',
     'djoser',
@@ -99,7 +100,6 @@ THIRD_PARTY_APPS = [
     'ckeditor_uploader',
     'drf_yasg',
     'drf_spectacular',
-    'channels'
 ]
 
 
