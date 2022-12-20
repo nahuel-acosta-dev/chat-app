@@ -250,7 +250,7 @@ ASGI_APPLICATION = "core.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-AUTH_USER_MODEL = "user.UserAccount"
+AUTH_USER_MODEL = "apps.user.UserAccount"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
