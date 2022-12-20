@@ -88,7 +88,7 @@ CHAT_APPS = ['apps.chat',
              'apps.user_in_chat_group',
              'apps.message_in_chat_group']
 THIRD_PARTY_APPS = [
-    'channels'
+    'channels',
     'corsheaders',
     'rest_framework',
     'djoser',
