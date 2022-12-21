@@ -50,6 +50,7 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:8000',
     'http://127.0.0.1:3000',
     'http://127.0.0.1:8000',
+    'https://chat-app-indol-mu.vercel.app'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -57,11 +58,12 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
     'http://127.0.0.1:3000',
     'http://127.0.0.1:8000',
+    'https://chat-app-indol-mu.vercel.app'
 ]
 
 
 ALLOWED_HOSTS = ['localhost', '0.0.0.0',
-                 '127.0.0.1', '']
+                 '127.0.0.1', 'https://chat-app-indol-mu.vercel.app']
 
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
@@ -221,7 +223,8 @@ DJOSER = {
                                           'http://127.0.0.1:8000/google',
                                           'http://localhost:8000/login',
                                           'http://127.0.0.1:3000/google',
-                                          'http://localhost:3000/google/'
+                                          'http://localhost:3000/google/',
+                                          'https://chat-app-indol-mu.vercel.app/google/'
 
                                           ],
     'SERIALIZERS': {
