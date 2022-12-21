@@ -72,7 +72,7 @@ if RENDER_EXTERNAL_HOSTNAME:
 # Application definition
 
 DJANGO_APPS = [
-    # "daphne",
+    "daphne",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -282,7 +282,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+ROOT_URLCONF = 'core.urls'
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
