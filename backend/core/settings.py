@@ -202,10 +202,10 @@ EMAIL_PORT = os.environ.get('EMAIL_PORT')
 EMAIL_USE_TLS = True
 
 PROTOCOL = "http"
-DOMAIN = os.environ.get('FRONTEND')
+DOMAIN = 'https://chat-app-indol-mu.vercel.app'
 
 DJOSER = {
-    'DOMAIN': os.environ.get('FRONTEND'),
+    'DOMAIN': 'https://chat-app-indol-mu.vercel.app',
     'SITE_NAME': 'Tinglet',
     'LOGIN_FIELD': 'email',
     'USER_CREATE_PASSWORD_RETYPE': True,
