@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap';
 import { GoogleLogin } from 'react-google-login';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { selectCurrentToken } from '../../features/auth/authSlice';
+import Loading from '../../components/loading/Loading';
 import axios from 'axios';
 import queryString from 'query-string';
 import GoogleButton from 'react-google-button'
@@ -10,6 +11,7 @@ import GoogleButton from 'react-google-button'
 axios.defaults.withCredentials = true;
 
 const GoogleButtonLogin = () => {
+  const [stateLoading, setStateLoading] = useState<Boolean>(false);
   const errRef = useRef<HTMLInputElement>(null);
   const [errMsg, setErrMsg] = useState<string>('');
   let location = useLocation();
@@ -23,6 +25,7 @@ const GoogleButtonLogin = () => {
 }, [location]);
 
   const continueWithGoogle = async () => {
+    setStateLoading(true);
     try {
         const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?redirect_uri=${process.env.REACT_APP_API_URL}/google/`);
         console.log(res)
@@ -33,13 +36,19 @@ const GoogleButtonLogin = () => {
         console.log("Error logging in");
         console.log('fallo en el catch');
     }
+    setStateLoading(false);
 };
 
   return(
     <div>
       <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
       <GoogleButton className='mx-auto mt-3' onClick={continueWithGoogle}>
-          Continue With Google
+        {
+          stateLoading ?
+          <Loading/>
+          :
+          <>Continue With Google</>
+        }
       </GoogleButton>
     </div>
   )
