@@ -1,8 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Button } from 'react-bootstrap';
-import { GoogleLogin } from 'react-google-login';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { selectCurrentToken } from '../../features/auth/authSlice';
+import { useLocation } from 'react-router-dom';
 import Loading from '../../components/loading/Loading';
 import axios from 'axios';
 import queryString from 'query-string';
