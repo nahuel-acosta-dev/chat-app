@@ -33,7 +33,7 @@ const GoogleRedirect = () => {
         }
         catch(err){
             console.log(err);
-            navigate('/auth/google?error=error');
+            navigate('/auth/errorLogin?error=error');
         }
     }
 

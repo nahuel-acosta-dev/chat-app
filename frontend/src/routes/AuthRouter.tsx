@@ -8,6 +8,7 @@ import ResetPasswordConfirmScreen from '../pages/auth/ResetPasswordConfirmScreen
 import ResetEmailConfirmScreen from '../pages/auth/ResetEmailConfirmScreen';
 import ResetPasswordScreen from '../pages/auth/ResetPasswordScreen';
 import GoogleButtonLogin from '../components/auth/GoogleButtonLogin';
+import ErrorLogin from '../pages/error/ErrorLogin';
 
 const AuthRouter = () => {
     return(
@@ -20,7 +21,7 @@ const AuthRouter = () => {
                 <Route path='email/reset/confirm/:uid/:token' element={<ResetEmailConfirmScreen />} />
                 <Route path='redirect/activation/email' element={<ResendActivationEmailScreen />} />
                 <Route path='reset-password' element={<ResetPasswordScreen />} />
-                <Route path='google' element={<GoogleButtonLogin/>} />
+                <Route path='errorLogin' element={<ErrorLogin/>} />
             </Routes>)
 }
 
