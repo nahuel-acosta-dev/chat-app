@@ -205,7 +205,8 @@ PROTOCOL = "https"
 DOMAIN = 'https://chat-app-indol-mu.vercel.app'
 
 DJOSER = {
-    'DOMAIN': 'https://chat-app-indol-mu.vercel.app',
+    'PROTOCOL': 'https',
+    'DOMAIN': 'chat-app-indol-mu.vercel.app',
     'SITE_NAME': 'Tinglet',
     'LOGIN_FIELD': 'email',
     'USER_CREATE_PASSWORD_RETYPE': True,
