@@ -224,6 +224,7 @@ DJOSER = {
                                           'http://localhost:8000/login',
                                           'http://127.0.0.1:3000/google',
                                           'http://localhost:3000/google/',
+                                          'https://chat-app-indol-mu.vercel.app/google',
                                           'https://chat-app-indol-mu.vercel.app/google/'
 
                                           ],
