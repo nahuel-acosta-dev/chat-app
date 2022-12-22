@@ -24,7 +24,7 @@ const GoogleButtonLogin = () => {
   const continueWithGoogle = async () => {
     setStateLoading(true);
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?redirect_uri=https://tinglet-api.onrender.com/google/`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?redirect_uri=https://chat-app-indol-mu.vercel.app/google/`);
         console.log(res)
         console.log(res.data.authorization_url)
         window.location.replace(res.data.authorization_url);
