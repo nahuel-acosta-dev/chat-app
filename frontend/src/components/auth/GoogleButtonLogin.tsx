@@ -24,7 +24,7 @@ const GoogleButtonLogin = () => {
 
   const continueWithGoogle = async () => {
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?redirect_uri=http://localhost:3000/google/`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?redirect_uri=${process.env.REACT_APP_API_URL}/google/`);
         console.log(res)
         console.log(res.data.authorization_url)
         window.location.replace(res.data.authorization_url);

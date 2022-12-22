@@ -20,7 +20,12 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-.env
+# Environments
+.env/
+/*.env
+**.env
+**/.gitignore/**
+*.gitignore
 .venv
-env/
+env
+.env
