@@ -30,7 +30,7 @@ const RegisterScreen = () => {
 
     useEffect(() => {
         if(redirect){
-            setTimeout(() => navigate('/redirect/activation/email'), 3000)
+            setTimeout(() => navigate('/auth/redirect/activation/email'), 3000)
         }
     }, [redirect])
 

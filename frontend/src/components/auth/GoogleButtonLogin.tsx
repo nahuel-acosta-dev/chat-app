@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../../components/loading/Loading';
 import axios from 'axios';
 import queryString from 'query-string';
@@ -9,6 +9,7 @@ axios.defaults.withCredentials = true;
 
 const GoogleButtonLogin = () => {
   const [stateLoading, setStateLoading] = useState<Boolean>(false);
+  const navigate = useNavigate();
   const errRef = useRef<HTMLInputElement>(null);
   const [errMsg, setErrMsg] = useState<string>('');
   let location = useLocation();
@@ -22,7 +23,6 @@ const GoogleButtonLogin = () => {
 }, [location]);
 
   const continueWithGoogle = async () => {
-    setStateLoading(true);
     try {
         const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?redirect_uri=https://chat-app-indol-mu.vercel.app/google/`);
         console.log(res)
@@ -33,7 +33,6 @@ const GoogleButtonLogin = () => {
         console.log("Error logging in");
         console.log('fallo en el catch');
     }
-    setStateLoading(false);
 };
 
   return(
